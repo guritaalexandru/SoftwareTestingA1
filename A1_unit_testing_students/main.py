@@ -1,6 +1,2 @@
-from login import login
-from products import *
-
-
-#Run program
-searchAndBuyProduct()
+import login as login_functions
+login_functions.login()
