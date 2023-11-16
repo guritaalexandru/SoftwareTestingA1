@@ -1,6 +1,6 @@
 import json
 
-
+# Check if password is valid
 def check_password(password):
     special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>',
                           '?', '/', '\\']
@@ -24,38 +24,32 @@ def login():
     username = input("Enter your username:")
     password = input("Enter your password:")
 
-    # Look for user in database
+    # Look for users in database
     with open('users.json', "r") as file:
         data = json.load(file)
         is_registered = False
 
-        # Check if user exists
+        # Check if user exists and if password corresponds
         for entry in data:
             if entry["username"] == username:
-                is_registered = True
-                break
-
-        # If user exists, check if password is correct
-        if is_registered:
-            for entry in data:
-                if entry["username"] == username and entry["password"] == password:
+                if entry["password"] == password:
                     print("Successfully logged in")
                     return {"username": entry["username"], "wallet": entry["wallet"]}
-            print("Either username or password were incorrect")
-            return None
-        else:
-            # If user does not exist, ask if they want to register
-            print("User does not exist. Would you like to register?")
-            register = input("Enter Y/N:")
-            if register == "Y":
-                new_pass = input("Enter a password:")
-
-                # Check if password is valid
-                if not check_password(new_pass):
-                    return None
-
-                data.append({"username": username, "password": new_pass, "wallet": 0})
-                with open('users.json', 'w') as outfile:
-                    json.dump(data, outfile)
-            else:
+                print("Either username or password were incorrect")
                 return None
+
+        # If user does not exist, ask if they want to register
+        print("User does not exist. Would you like to register?")
+        register = input("Enter Y/N:")
+        if register == "Y":
+            new_pass = input("Enter a password:")
+
+            # Check if password is valid
+            if not check_password(new_pass):
+                return None
+
+            data.append({"username": username, "password": new_pass, "wallet": 0})
+            with open('users.json', 'w') as outfile:
+                json.dump(data, outfile)
+        else:
+            return None
