@@ -90,7 +90,7 @@ def check_cart(user, cart):
     for i in cart.retrieve_item():
         print(i.get_product())
     # Ask the user if they want to checkout
-    question = input("Do you want to checkout (Y/N)?")
+    question = input("Do you want to checkout (y/N)?")
     if question.lower()  == "y":
         return checkout(user,cart)
     else:
