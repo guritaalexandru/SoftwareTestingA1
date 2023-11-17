@@ -96,10 +96,24 @@ def check_cart(user, cart):
     else:
         return False
 
+# Function to update the users.json file
+def update_users_json(username, new_wallet):
+    with open("users.json", "r") as file:
+        users = json.load(file)
+
+    for user in users:
+        if user["username"] == username:
+            user["wallet"] = new_wallet
+            break
+
+    with open("users.json", "w") as file:
+        json.dump(users, file, indent=4)
+
 # Main function for the shopping and checkout process
 def checkoutAndPayment(login_info):
     # Create/retrieve a user using login information
     user = User(login_info["username"], login_info["wallet"])
+    purchase_made = False
     # Display available products
     for i, product in enumerate(products):
         print(f"{i+1}. {product.name} - ${product.price} - Units: {product.units}")
@@ -112,12 +126,16 @@ def checkoutAndPayment(login_info):
         if choice == 'c':
              # Check the cart and proceed to checkout if requested
             check = check_cart(user, cart)
-            if check is False:
+            if check is True:
+                purchase_made = True
+            else:
                 continue
         elif choice == 'l':
             # Logout the user
             ask_logout = logout(cart)
             if ask_logout is True:
+                if purchase_made is True:
+                    update_users_json(user.name, user.wallet)
                 print("You have been logged out")
                 break
             else:
