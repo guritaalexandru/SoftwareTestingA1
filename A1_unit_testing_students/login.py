@@ -1,5 +1,6 @@
 import json
 
+
 # Check if password is valid
 def check_password(password):
     special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>',
