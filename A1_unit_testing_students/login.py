@@ -19,6 +19,9 @@ def check_password(password):
         return False
     return True
 
+def write_to_file(data):
+    with open('users.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 # Login as a user
 def login():
@@ -50,7 +53,9 @@ def login():
                 return None
 
             data.append({"username": username, "password": new_pass, "wallet": 0})
-            with open('users.json', 'w') as outfile:
-                json.dump(data, outfile)
+            write_to_file(data)
+
+            print("Successfully registered")
+            return {"username": username, "wallet": 0}
         else:
             return None
