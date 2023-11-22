@@ -232,4 +232,3 @@ def test_load_products_from_csv_added_column_file_3(csv_file_added_column_state_
         assert v.name == csv_name[i]
         assert v.units == csv_units[i]
         assert v.price == csv_price[i]
-
