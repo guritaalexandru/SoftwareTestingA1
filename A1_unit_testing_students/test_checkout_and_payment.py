@@ -1,103 +1,88 @@
+import json
 import pytest
-from checkout_and_payment import checkoutAndPayment
-from unittest.mock import patch
+from unittest.mock import patch, mock_open, MagicMock
+from checkout_and_payment import checkoutAndPayment, update_users_json, products
 
-def test_login_existing_user_correct_wallet():
-    # Test login with correct information
-    pass  # Placeholder for test implementation
+@pytest.fixture
+def mock_open_users_file():
+    users = [{"username": "user1", "wallet": 100}, {"username": "user2", "wallet": 200}]
+    return mock_open(read_data=json.dumps(users))
 
-def test_login_existing_user_incorrect_wallet():
-    # Test login with incorrect information
-    pass  # Placeholder for test implementation
+@pytest.fixture
+def mock_input(mocker):
+    return mocker.patch('builtins.input')
 
-def test_creating_new_user():
-    # Test creating a new user
-    pass  # Placeholder for test implementation
+@pytest.fixture
+def mock_check_cart(mocker):
+    return mocker.patch('checkout_and_payment.check_cart', return_value=True)
 
-def test_display_all_products():
-    # Test displaying all available products
-    pass  # Placeholder for test implementation
+@pytest.fixture
+def mock_logout(mocker):
+    return mocker.patch('checkout_and_payment.logout', return_value=True)
 
-def test_valid_product_selection():
-    # Test valid product selection
-    pass  # Placeholder for test implementation
+@pytest.fixture
+def mock_update_users_json(mocker):
+    return mocker.patch('checkout_and_payment.update_users_json')
 
-def test_invalid_product_number():
-    # Test with an invalid product number
-    pass  # Placeholder for test implementation
+# Tests for update_users_json
+def capture_write_calls(mock_file):
+    content = []
+    def side_effect_write(data):
+        content.append(data)
+        return original_write(data)
+    original_write = mock_file.write
+    mock_file.write = MagicMock(side_effect=side_effect_write)
+    return content
 
-def test_non_digit_input():
-    # Test with non-digit input
-    pass  # Placeholder for test implementation
+def test_update_users_json_existing_user(mock_open_users_file):
+    with patch("builtins.open", mock_open_users_file) as mock_file:
+        content = capture_write_calls(mock_file())
+        update_users_json("user1", 150)
+        assert json.loads(''.join(content)) == [{"username": "user1", "wallet": 150}, {"username": "user2", "wallet": 200}]
 
-def test_boundary_product_selection():
-    # Test product selection at boundaries
-    pass  # Placeholder for test implementation
+def test_update_users_json_new_user(mock_open_users_file):
+    with patch("builtins.open", mock_open_users_file) as mock_file:
+        content = capture_write_calls(mock_file())
+        update_users_json("new_user", 300)
+        assert json.loads(''.join(content)) == [{"username": "user1", "wallet": 100}, {"username": "user2", "wallet": 200}, {"username": "new_user", "wallet": 300}]
 
-def test_out_of_stock_product():
-    # Test selecting an out-of-stock product
-    pass  # Placeholder for test implementation
+def test_update_users_json_exceptions():
+    with patch("builtins.open", mock_open(read_data="not valid json")):
+        with pytest.raises(ValueError):
+            update_users_json("user1", 150)
+    with pytest.raises(FileNotFoundError):
+        update_users_json("user1", 150, "nonexistent_file.json")
 
-def test_cart_check_without_items():
-    # Test cart check without adding items
-    pass  # Placeholder for test implementation
+# Tests for checkoutAndPayment
+@pytest.mark.parametrize("invalid_login_info", [
+    "invalid_string", 12345, 4.56,
+    {"username": "testuser"}, {"wallet": 100},
+    {"user": "testuser", "wallet": 100}
+])
+def test_checkout_and_payment_invalid_login_info_type(invalid_login_info, mock_input, mock_check_cart, mock_logout, mock_update_users_json):
+    with pytest.raises(TypeError):
+        checkoutAndPayment(invalid_login_info)
 
-def test_cart_check_with_items():
-    # Test cart check after adding items
-    pass  # Placeholder for test implementation
+@pytest.mark.parametrize("mock_input_value, expected_output", [
+    (['l'], "You have been logged out."),
+    (['c', 'l'], "You have been logged out."),
+    (['1', 'c', 'l'], "Apple added to your cart."),
+    (['73', 'l'], "\nInvalid input. Please try again."),
+    (['apple', 'l'], "\nInvalid input. Please try again."),
+    (['0.75', 'l'], "\nInvalid input. Please try again."),
+    (['[]', 'l'], "\nInvalid input. Please try again.")
+])
+def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+    mock_input.side_effect = mock_input_value
+    checkoutAndPayment({"username": "testuser", "wallet": 100})
+    captured = capsys.readouterr()
+    assert expected_output in captured.out
+    mock_logout.assert_called_once()
 
-def test_complete_purchase():
-    # Test completing a purchase
-    pass  # Placeholder for test implementation
-
-def test_cancel_purchase():
-    # Test canceling a purchase
-    pass  # Placeholder for test implementation
-
-def test_logout_without_purchase():
-    # Test logout without making a purchase
-    pass  # Placeholder for test implementation
-
-def test_logout_after_purchase():
-    # Test logout after making a purchase
-    pass  # Placeholder for test implementation
-
-def test_cancel_logout():
-    # Test canceling logout
-    pass  # Placeholder for test implementation
-
-def test_add_multiple_items_to_cart():
-    # Test adding multiple items to the cart
-    pass  # Placeholder for test implementation
-
-def test_add_same_item_multiple_times_to_cart():
-    # Test adding the same item multiple times to the cart
-    pass  # Placeholder for test implementation
-
-def test_stock_update_after_purchase():
-    # Test stock update after a purchase
-    pass  # Placeholder for test implementation
-
-def test_user_wallet_update_after_purchase():
-    # Test user wallet update after a purchase
-    pass  # Placeholder for test implementation
-
-def test_continuous_invalid_inputs():
-    # Test continuous invalid inputs
-    pass  # Placeholder for test implementation
-
-def test_large_numbers_for_product_selection():
-    # Test with unusually large numbers for product selection
-    pass  # Placeholder for test implementation
-
-def test_special_characters_or_strings():
-    # Test with special characters or strings as input
-    pass  # Placeholder for test implementation
-
-def test_performance_under_load():
-    # Test performance under load
-    pass  # Placeholder for test implementation
-
-def test_data_persistence():
-    # Test data persistence
-    pass  # Placeholder for test implementation
+def test_checkout_and_payment_print_products(mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+    mock_input.side_effect = ['l']
+    checkoutAndPayment({"username": "testuser", "wallet": 100})
+    captured = capsys.readouterr()
+    for product in products:
+        assert f"{product.name} - ${product.price}" in captured.out
+    mock_logout.assert_called_once()

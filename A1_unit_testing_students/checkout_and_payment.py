@@ -1,3 +1,5 @@
+import json
+
 import csv
 from logout import logout
 
@@ -60,7 +62,7 @@ cart = ShoppingCart()
 def checkout(user, cart):
     if not cart.items:
         print("\nYour basket is empty. Please add items before checking out.")
-        return
+        return False
 
     total_price = cart.get_total_price()
 
@@ -68,7 +70,7 @@ def checkout(user, cart):
         print("\n")
         print(f"You don't have enough money to complete the purchase.")
         print("Please try again!")
-        return
+        return False
 
     # Deduct the total price from the user's wallet
     user.wallet -= total_price
@@ -83,6 +85,7 @@ def checkout(user, cart):
     # Print a thank you message with the remaining balance
     print("\n")
     print(f"Thank you for your purchase, {user.name}! Your remaining balance is {user.wallet}")
+    return True
     
 # Function to check the cart and proceed to checkout if requested
 def check_cart(user, cart):
@@ -97,20 +100,40 @@ def check_cart(user, cart):
         return False
 
 # Function to update the users.json file
-def update_users_json(username, new_wallet):
-    with open("users.json", "r") as file:
-        users = json.load(file)
+def update_users_json(username, new_wallet, file_path="users.json"):
+    try:
+        # Read the existing users from the file
+        with open(file_path, "r") as file:
+            try:
+                users = json.load(file)
+            except json.JSONDecodeError:
+                raise ValueError("Invalid JSON format in the file.")
 
-    for user in users:
-        if user["username"] == username:
-            user["wallet"] = new_wallet
-            break
+        # Update the wallet amount for the existing user or add a new user
+        user_found = False
+        for user in users:
+            if user["username"] == username:
+                user["wallet"] = new_wallet
+                user_found = True
+                break
 
-    with open("users.json", "w") as file:
-        json.dump(users, file, indent=4)
+        if not user_found:
+            users.append({"username": username, "wallet": new_wallet})
+
+        # Write the updated users back to the file
+        with open(file_path, "w") as file:
+            json.dump(users, file, indent=4)
+
+    except FileNotFoundError:
+        raise FileNotFoundError(f"The file {file_path} was not found.")
+    except IOError as e:
+        raise IOError(f"An error occurred while accessing the file: {e}")
 
 # Main function for the shopping and checkout process
 def checkoutAndPayment(login_info):
+    # Check if login_info is a dictionary with the required keys
+    if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+        raise TypeError("Invalid login_info format")
     # Create/retrieve a user using login information
     user = User(login_info["username"], login_info["wallet"])
     purchase_made = False
@@ -136,7 +159,7 @@ def checkoutAndPayment(login_info):
             if ask_logout is True:
                 if purchase_made is True:
                     update_users_json(user.name, user.wallet)
-                print("You have been logged out")
+                print("You have been logged out.")
                 break
             else:
                 continue
@@ -150,4 +173,3 @@ def checkoutAndPayment(login_info):
                 print(f"Sorry, {selected_product.name} is out of stock.")
         else:
             print("\nInvalid input. Please try again.")
-
