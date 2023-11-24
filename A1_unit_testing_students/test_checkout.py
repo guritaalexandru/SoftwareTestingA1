@@ -84,8 +84,10 @@ def multi_cart():
 
 
 def test_checkout_empty(user_1, empty_cart):
+    # Test checkout with an empty cart
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_1, empty_cart)
+        # Assert that empty basket was identified
         assert (
             mocked_stdout.getvalue()
             == "\nYour basket is empty. Please add items before checking out.\n"
@@ -93,8 +95,10 @@ def test_checkout_empty(user_1, empty_cart):
 
 
 def test_checkout_single(user_1, single_cart_1):
+    # Test checkout with a single item in the cart
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_1, single_cart_1)
+        # Assert that the one item was bought
         assert (
             mocked_stdout.getvalue()
             == "\n\nThank you for your purchase, Test! Your remaining balance is 8.0\n"
@@ -102,8 +106,10 @@ def test_checkout_single(user_1, single_cart_1):
 
 
 def test_checkout_multiple(user_1, multi_cart):
+    # The checkout with multiple items in cart
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_1, multi_cart)
+        # Assert that multiple items were bought
         assert (
             mocked_stdout.getvalue()
             == "\n\nThank you for your purchase, Test! Your remaining balance is 1.5\n"
@@ -111,13 +117,17 @@ def test_checkout_multiple(user_1, multi_cart):
 
 
 def test_checkout_cart_clear(user_2, filled_cart):
+    # Test that the function clears the cart correctly
     checkout(user_2, filled_cart)
+    # Assert that the cart gets cleared
     assert filled_cart.items == []
 
 
 def test_checkout_insufficient_funds(user_1, filled_cart):
+    # Test checkout with insufficient user funds
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_1, filled_cart)
+        # Assert that insufficient funds was identified in checkout
         assert (
             mocked_stdout.getvalue()
             == "\n\nYou don't have enough money to complete the purchase.\nPlease try again!\n"
@@ -125,8 +135,10 @@ def test_checkout_insufficient_funds(user_1, filled_cart):
 
 
 def test_checkout_sufficient_funds(user_2, filled_cart):
+    # Test checkout with sufficient user funds
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_2, filled_cart)
+        # Assert that sufficient funds was identified in checkout
         assert (
             mocked_stdout.getvalue()
             == "\n\nThank you for your purchase, Test_Rich! Your remaining balance is 1988.0\n"
@@ -134,20 +146,26 @@ def test_checkout_sufficient_funds(user_2, filled_cart):
 
 
 def test_checkout_product_zero_units_single(user_1, single_cart_1):
+    # Test checkout to see that no zero-unit product remains, they should have been removed
     checkout(user_1, single_cart_1)
-    for item in single_cart_1.items:
-        assert item.units > 0
+    for i in single_cart_1.items:
+        # Assert units are above zero 
+        assert (i.units > 0)
 
 
 def test_checkout_product_zero_units_multi(user_1, multi_cart):
+    # Test checkout for a bigger cart to see that no zero-unit product remains, they should have been removed
     checkout(user_1, multi_cart)
-    for item in multi_cart.items:
-        assert item.units > 0
+    for i in multi_cart.items:
+        # Assert units are above zero 
+        assert (i.units > 0)
 
 
 def test_checkout_just_enough_money(user_3, single_cart_2):
+    # Test checkout for the case when the user has just enough money for the transaction
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_3, single_cart_2)
+        # Assert that 0.0 money remains in the wallet 
         assert (
             mocked_stdout.getvalue()
             == "\n\nThank you for your purchase, Test_Exakt! Your remaining balance is 0.0\n"
@@ -155,7 +173,10 @@ def test_checkout_just_enough_money(user_3, single_cart_2):
 
 
 def test_checkout_wallet_update(user_2, filled_cart):
-    initial_wallet = user_2.wallet
-    total_price = filled_cart.get_total_price()
+    # Test checkout to see that the cost of the transaction is removed from the wallet of the user.
+    wallet = user_2.wallet
+    price = filled_cart.get_total_price()
     checkout(user_2, filled_cart)
-    assert user_2.wallet == initial_wallet - total_price
+    cost = wallet - price
+    # Assert that the remaining money in the wallet wallet is correct
+    assert (cost == user_2.wallet)
