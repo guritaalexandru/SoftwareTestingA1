@@ -19,9 +19,11 @@ def check_password(password):
         return False
     return True
 
+
 def write_to_file(data):
     with open('users.json', 'w') as outfile:
         json.dump(data, outfile)
+
 
 # Login as a user
 def login():
