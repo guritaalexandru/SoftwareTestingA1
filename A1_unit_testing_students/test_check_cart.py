@@ -10,13 +10,12 @@ def cart_1(products):
     cart.items = products
     return cart
 
+
 @pytest.fixture
 def cart_2():
     cart = ShoppingCart()
     cart.clear_items()
     return cart
-
-
 
 
 @pytest.fixture
@@ -76,95 +75,96 @@ def csv_name():
 
 def test_check_cart_input_no(user_1, cart_1):
     # Test the load function for optimal csv data
-    with patch('builtins.input', return_value='N'):
-        assert(check_cart(user_1, cart_1) == False)
+    with patch("builtins.input", return_value="N"):
+        assert check_cart(user_1, cart_1) == False
+
 
 def test_check_cart_input_yes_wrong_case(user_1, cart_1):
     # Test the load function for optimal csv data
-    with patch('builtins.input', return_value='Y'):
-        assert(check_cart(user_1, cart_1) != False)
+    with patch("builtins.input", return_value="Y"):
+        assert check_cart(user_1, cart_1) == False
+
 
 def test_check_cart_input_ascii(user_1, cart_1):
     # Test the load function for optimal csv data
-    for i in range(0, 256, 1) : 
-        if chr(i) == 'y' or 'Y':
+    for i in range(0, 256, 1):
+        if chr(i) == "y" or "Y":
             continue
 
-        with patch('builtins.input', return_value=chr(i)):
-            assert(check_cart(user_1, cart_1) != False)
+        with patch("builtins.input", return_value=chr(i)):
+            assert check_cart(user_1, cart_1) != False
+
 
 def test_check_cart_checkout_called(user_1, cart_1):
-    with patch('checkout_and_payment.checkout') as mocked:
+    with patch("checkout_and_payment.checkout") as mocked:
         mocked.return_value = None
 
-        with patch('builtins.input', return_value='Y'):
+        with patch("builtins.input", return_value="Y"):
             check_cart(user_1, cart_1)
-    
+
             mocked.assert_called_once()
+
 
 def test_check_cart_checkout_returns_none(user_1, cart_1):
-    with patch('checkout_and_payment.checkout') as mocked:
+    with patch("checkout_and_payment.checkout") as mocked:
         mocked.return_value = None
 
-        with patch('builtins.input', return_value='Y'):
+        with patch("builtins.input", return_value="Y"):
             result = check_cart(user_1, cart_1)
-    
+
             mocked.assert_called_once()
 
-            assert(result == None)
+            assert result == None
+
 
 def test_check_cart_empty_cart(user_1, cart_2):
-
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-    
-        with patch('builtins.input', return_value='Y'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="Y"):
             result = check_cart(user_1, cart_2)
-        
-    
-            assert(result == None)
 
+            assert result == False
 
+        assert (
+            mocked_stdout.getvalue()
+            == "\nYour basket is empty. Please add items before checking out.\n"
+        )
 
-
-        assert mocked_stdout.getvalue() == "\nYour basket is empty. Please add items before checking out.\n"
 
 def test_check_cart_insufficient_funds(user_1, cart_1):
-
     user_1.wallet = 10
 
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-    
-        with patch('builtins.input', return_value='Y'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="Y"):
             result = check_cart(user_1, cart_1)
-        
-    
-            assert(result == None)
 
+            assert result == False
 
-
-
-        assert mocked_stdout.getvalue().splitlines()[-2] == "You don't have enough money to complete the purchase."
+        assert (
+            mocked_stdout.getvalue().splitlines()[-2]
+            == "You don't have enough money to complete the purchase."
+        )
         assert mocked_stdout.getvalue().splitlines()[-1] == "Please try again!"
 
 
 def test_check_cart_invalid_input(user_1, cart_1):
     invalid_inputs = ["abc", "", "123", " ", "!"]
     for input in invalid_inputs:
-        with patch('builtins.input', return_value=input):
+        with patch("builtins.input", return_value=input):
             assert check_cart(user_1, cart_1) == False, f"Failed for input: {input}"
 
 
 def test_check_cart_contents(user_1, cart_1):
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-        with patch('builtins.input', return_value='N'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="N"):
             check_cart(user_1, cart_1)
         output = mocked_stdout.getvalue()
         for item in cart_1.items:
             assert item.name in output, f"Item {item.name} not found in cart output"
 
+
 def test_check_cart_case_sensitivity(user_1, cart_1):
     invalid_inputs = ["yes", "YES"]
     for input in invalid_inputs:
-        with patch('builtins.input', return_value=input):
+        with patch("builtins.input", return_value=input):
             result = check_cart(user_1, cart_1)
             assert result == False, f"Failed for valid case-insensitive input: {input}"
