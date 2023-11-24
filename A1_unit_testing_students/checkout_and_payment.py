@@ -60,7 +60,7 @@ cart = ShoppingCart()
 def checkout(user, cart):
     if not cart.items:
         print("\nYour basket is empty. Please add items before checking out.")
-        return
+        return False
 
     total_price = cart.get_total_price()
 
@@ -68,7 +68,7 @@ def checkout(user, cart):
         print("\n")
         print(f"You don't have enough money to complete the purchase.")
         print("Please try again!")
-        return
+        return False
 
     # Deduct the total price from the user's wallet
     user.wallet -= total_price
@@ -83,6 +83,7 @@ def checkout(user, cart):
     # Print a thank you message with the remaining balance
     print("\n")
     print(f"Thank you for your purchase, {user.name}! Your remaining balance is {user.wallet}")
+    return True
     
 # Function to check the cart and proceed to checkout if requested
 def check_cart(user, cart):
