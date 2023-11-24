@@ -3,7 +3,7 @@ from unittest import mock
 import pytest
 import csv
 from io import StringIO
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 from products import display_csv_as_table, display_filtered_table, searchAndBuyProduct
 
 valid_csv_products = "Product,Price,Units\nProduct1,10,2\nProduct2,20,1\nProduct3,30,5\n"
@@ -200,6 +200,8 @@ def test_display_filtered_csv_as_table_boolean_search_parameter():
 # Unit test cases for searchAndBuyProduct
 valid_test_inputs = ["Ramanathan", "Notaproblem23*"]
 valid_checkout_and_payment_inputs = ["1", "c", "y", "l"]
+valid_json_users = """[
+  {"username": "Ramanathan", "password": "Notaproblem23*", "wallet": 100}]"""
 
 
 @pytest.fixture
@@ -247,15 +249,22 @@ def mock_input_filtered(mocker):
     return mocker.patch('products.input', side_effect=['Product1', 'Y'])
 
 
+@pytest.fixture
+def mock_open_users(mocker):
+    json_file = StringIO(valid_json_users)
+    return mocker.patch('checkout_and_payment.open', side_effect=mock_open(read_data=json_file.getvalue()))
+
+
 def test_search_and_buy_product_all(mock_login, check_password_stub_correct, mock_display_csv_as_table,
                                     mock_checkout_and_payment,
-                                    mock_input_all, mock_input_login, mock_input_checkout_and_payment):
+                                    mock_input_all, mock_input_login, mock_input_checkout_and_payment, mock_open_users):
     searchAndBuyProduct()
     mock_display_csv_as_table.assert_called_once()
 
 
 def test_search_and_buy_products_filtered(mock_login, check_password_stub_correct,
                                           mock_checkout_and_payment, mock_display_filtered_table,
-                                          mock_input_filtered, mock_input_login, mock_input_checkout_and_payment):
+                                          mock_input_filtered, mock_input_login, mock_input_checkout_and_payment,
+                                          mock_open_users):
     searchAndBuyProduct()
     mock_display_filtered_table.assert_called_once()
