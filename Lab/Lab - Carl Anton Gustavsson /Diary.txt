@@ -1,0 +1,252 @@
+RED
+
+Imported the relevant packages and modules, created fixture with the author strings to be tested with and wrote a test for extracting a simple author with only a last name.
+
+import bibtex
+import pytest
+
+
+@pytest.fixture
+def setup_data():
+    return {
+        "simple_author_1": "Smith",
+        "simple_author_2": "Jones",
+        "author_1": "John Smith",
+        "author_2": "Bob Jones",
+        "author_3": "Justin Kenneth Pearson",
+        "surname_first_1": "Pearson, Justin Kenneth",
+        "surname_first_2": "Van Hentenryck, Pascal",
+        "multiple_authors_1": "Pearson, Justin and Jones, Bob",
+    }
+
+
+def test_author_1(setup_data):
+    # Test only surnames.
+    (Surname, FirstNames) = bibtex.extract_author(setup_data["simple_author_1"])
+    assert(Surname, FirstNames) == ('Smith', '')
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['simple_author_2'])
+    assert(Surname, FirstNames) == ('Jones', '')
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 1 item
+
+test_extract_author.py::test_author_1 FAILED                                                                                                         [100%]
+==================================================================================== FAILURES ==============================================================================
+_________________________________________________________________________________ test_author_1 ____________________________________________________________________________
+
+GREEN
+
+Write the code below to pass the test for a simple author.
+
+def extract_author(str):
+    return (str, '')
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 1 item
+
+test_extract_author.py::test_author_1 PASSED                                                                                                         [100%]
+=============================================================================== 1 passed in 0.01s =========================================================================
+
+RED
+
+Wrote a test to test with first name and last name.
+
+def test_author_2(setup_data):
+    # Test simple firstname author.
+    (Surname, First) = bibtex.extract_author(setup_data['author_1'])
+    assert(Surname, First) == ('Smith' ,'John')
+    (Surname, First) = bibtex.extract_author(setup_data['author_2'])
+    assert(Surname, First) == ('Jones' ,'Bob')
+
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 2 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                         [ 50%]
+test_extract_author.py::test_author_2 FAILED                                                                                                         [100%]
+==================================================================================== FAILURES =============================================================================
+
+GREEN
+
+Write the below code to pass the previously added test for first and last name.
+
+def extract_author(str):
+    s = str.split(" ")
+    if len(s) == 1:
+        return(str, '')
+    else:
+        return(s[1], s[0])
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 2 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                         [ 50%]
+test_extract_author.py::test_author_2 PASSED                                                                                                         [100%]
+=============================================================================== 2 passed in 0.01s ==========================================================================
+
+RED
+
+Added test for multiple firstnames.
+
+def test_author_3(setup_data):
+    # Test for firstname and middlename author.
+    (Surname, First) = bibtex.extract_author(setup_data['author_3'])
+    assert(Surname, First) == ('Pearson' ,'Justin Kenneth')
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 3 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 33%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 66%]
+test_extract_author.py::test_author_3 FAILED                                                                                                           [100%]
+==================================================================================== FAILURES ==============================================================================
+
+GREEN
+
+To pass the the test for multiple last names, modify and write the code below.
+
+def extract_author(str):
+    s = str.split(" ")
+    if len(s) == 1:
+        return(str, '')
+    if len(s) == 2:
+        return(s[1], s[0])
+    else:
+        return(s[2], s[0] + " " + s[1])
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 3 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 33%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 66%]
+test_extract_author.py::test_author_3 PASSED                                                                                                           [100%]
+=============================================================================== 3 passed in 0.01s ==========================================================================
+
+RED
+
+To check for the case when the last name comes first, added the below test.
+
+def test_surname_first(setup_data):
+    # test for firstname,  middlename and lastname in author when lastname comes first.
+    (surname, first) = bibtex.extract_author(setup_data['surname_first_1'])
+    assert(surname, first) == ('Pearson' ,'Justin Kenneth')
+
+    # test for firstname and lastname(with space in lastname) in author when lastname comes first.
+    (surname, first) = bibtex.extract_author(setup_data['surname_first_2'])
+    assert(surname, first) == ('Van Hentenryck' ,'Pascal')
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 4 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 25%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 50%]
+test_extract_author.py::test_author_3 PASSED                                                                                                           [ 75%]
+test_extract_author.py::test_surname_first FAILED                                                                                                      [100%]
+
+==================================================================================== FAILURES ==============================================================================
+
+GREEN
+
+To account for when the lastname comes first, the below code was added to the extract_author function.
+
+def extract_author(str):
+    s = str.split(" ")
+    if "," in str:
+        t = str.split(",")
+        first = t[1]
+        last = t[0]
+        print(first, last)
+        first = first.strip()
+        last = last.strip()
+        author = (last, first)
+        print(author)
+        return author
+    if len(s) == 1:
+        return (str, "")
+    if len(s) == 2:
+        return (s[1], s[0])
+    else:
+        return (s[2], s[0] + " " + s[1])
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 4 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 25%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 50%]
+test_extract_author.py::test_author_3 PASSED                                                                                                           [ 75%]
+test_extract_author.py::test_surname_first PASSED                                                                                                      [100%]
+
+=============================================================================== 4 passed in 0.02s ==========================================================================
+
+RED
+
+The below test was added to check that the extract_authors function extracts authors as intended from string of a series of authors.
+
+def test_multiple_authors(setup_data):
+    # test for firstname,  middlename and lastname in with multiple authors.
+    Authors = bibtex.extract_authors(setup_data['multiple_authors_1'])
+    assert(Authors[0] == ('Pearson' ,'Justin'))
+    assert(Authors[1] == ('Jones' ,'Bob'))
+
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 5 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 20%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 40%]
+test_extract_author.py::test_author_3 PASSED                                                                                                           [ 60%]
+test_extract_author.py::test_surname_first PASSED                                                                                                      [ 80%]
+test_extract_author.py::test_multiple_authors FAILED                                                                                                   [100%]
+==================================================================================== FAILURES ==============================================================================
+
+GREEN
+
+To make sure that the extract_authors function works as intended, passes the test, the below code is written.
+
+def extract_authors(str):
+    l = str.split(" and ")
+    authors = []
+    print(l)
+    for i in l:
+        authors.append(extract_author(i))
+    return authors
+
+============================================================================== test session starts =========================================================================
+platform darwin -- Python 3.9.18, pytest-7.4.3, pluggy-1.3.0 -- /usr/local/opt/python@3.9/bin/python3.9
+cachedir: .pytest_cache
+rootdir: /Users/antongustavsson/Lab/lab_software
+collected 5 items
+
+test_extract_author.py::test_author_1 PASSED                                                                                                           [ 20%]
+test_extract_author.py::test_author_2 PASSED                                                                                                           [ 40%]
+test_extract_author.py::test_author_3 PASSED                                                                                                           [ 60%]
+test_extract_author.py::test_surname_first PASSED                                                                                                      [ 80%]
+test_extract_author.py::test_multiple_authors PASSED                                                                                                   [100%]
+=============================================================================== 5 passed in 0.02s ==========================================================================
