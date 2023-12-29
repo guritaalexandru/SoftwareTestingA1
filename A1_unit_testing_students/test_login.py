@@ -14,17 +14,17 @@ new_user_valid_password = ["NewUser", "", "Y", "ValidPassword1!"]
 new_user_invalid_password = ["NewUser", "", "Y", "invalidpassword"]
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def write_to_file_stub(mocker):
     return mocker.patch('login.write_to_file', return_value=None)
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def check_password_stub_incorrect(mocker):
     return mocker.patch('login.check_password', return_value=False)
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def check_password_stub_correct(mocker):
     return mocker.patch('login.check_password', return_value=True)
 
