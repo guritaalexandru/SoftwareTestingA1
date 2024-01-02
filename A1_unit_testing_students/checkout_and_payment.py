@@ -3,24 +3,27 @@ import json
 import csv
 from logout import logout
 
-#User class to represent user information
+
+# User class to represent user information
 class User:
     def __init__(self, name, wallet):
         self.name = name
         self.wallet = float(wallet)
 
-#Product class to represent product information
+
+# Product class to represent product information
 class Product:
     def __init__(self, name, price, units):
         self.name = name
         self.price = float(price)
         self.units = int(units)
 
-#A method to get product details as a list
+    # A method to get product details as a list
     def get_product(self):
         return [self.name, self.price, self.units]
 
-#ShoppingCart class to represent the user's shopping cart
+
+# ShoppingCart class to represent the user's shopping cart
 class ShoppingCart:
     def __init__(self):
         self.items = []
@@ -45,6 +48,7 @@ class ShoppingCart:
     def get_total_price(self):
         return sum(item.price for item in self.items)
 
+
 # Function to load products from a CSV file
 def load_products_from_csv(file_path):
     products = []
@@ -54,9 +58,11 @@ def load_products_from_csv(file_path):
             products.append(Product(row['Product'], row['Price'], row['Units']))
     return products
 
+
 # Load products from the CSV file
-products= load_products_from_csv("products.csv")
+products = load_products_from_csv("products.csv")
 cart = ShoppingCart()
+
 
 # Function to complete the checkout process
 def checkout(user, cart):
@@ -86,18 +92,48 @@ def checkout(user, cart):
     print("\n")
     print(f"Thank you for your purchase, {user.name}! Your remaining balance is {user.wallet}")
     return True
-    
+
+
 # Function to check the cart and proceed to checkout if requested
 def check_cart(user, cart):
     # Print products in the cart
     for i in cart.retrieve_item():
         print(i.get_product())
+
+    # Ask the user if he wants to remove something from the cart or not
+    removeQuestion = input("Do you want to remove something from your cart (y/N)?")
+    if removeQuestion.lower() == "y":
+        # Loop until the user doesn't want to remove anything
+        while True:
+            # Ask the user which product he wants to remove
+            removeProductName = input("Which product do you want to remove?")
+            # Remove the product from the cart
+            for i in cart.retrieve_item():
+                if i.name == removeProductName:
+                    cart.remove_item(i)
+                    # Update the product units
+                    for j in products:
+                        if j.name == removeProductName:
+                            j.units += 1
+                    break
+
+            # Display the updated cart
+            print("Updated cart:")
+            for i in cart.retrieve_item():
+                print(i.get_product())
+
+            # Ask the user if he wants to remove something else
+            removeQuestion2 = input("Do you want to remove something else from your cart (y/N)?")
+            if removeQuestion2.lower() == "n":
+                break
+
     # Ask the user if they want to checkout
     question = input("Do you want to checkout (y/N)?")
-    if question.lower()  == "y":
-        return checkout(user,cart)
+    if question.lower() == "y":
+        return checkout(user, cart)
     else:
         return False
+
 
 # Function to update the users.json file
 def update_users_json(username, new_wallet, file_path="users.json"):
@@ -129,6 +165,7 @@ def update_users_json(username, new_wallet, file_path="users.json"):
     except IOError as e:
         raise IOError(f"An error occurred while accessing the file: {e}")
 
+
 # Main function for the shopping and checkout process
 def checkoutAndPayment(login_info):
     # Check if login_info is a dictionary with the required keys
@@ -139,15 +176,15 @@ def checkoutAndPayment(login_info):
     purchase_made = False
     # Display available products
     for i, product in enumerate(products):
-        print(f"{i+1}. {product.name} - ${product.price} - Units: {product.units}")
-    
+        print(f"{i + 1}. {product.name} - ${product.price} - Units: {product.units}")
+
     while True:
-        
+
         # Get user input for product selection in numbers
         choice = input("\nEnter the product number you want to add to your cart (c to check cart, l to logout): ")
-        
+
         if choice == 'c':
-             # Check the cart and proceed to checkout if requested
+            # Check the cart and proceed to checkout if requested
             check = check_cart(user, cart)
             if check is True:
                 purchase_made = True
