@@ -1,5 +1,8 @@
-import login as login_functions
-import products as products_functions
+from products import searchAndBuyProduct
 
-#login_functions.login()
-products_functions.searchAndBuyProduct()
+#Run program
+def run_program():
+    searchAndBuyProduct()
+
+if __name__ == "__main__":
+    run_program()
