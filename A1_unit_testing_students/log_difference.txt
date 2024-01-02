@@ -1,0 +1,14 @@
+7c7
+< test_change_details.py .FF                                               [  2%]
+---
+> test_change_details.py ...                                               [  2%]
+12c12
+< test_login.py ....F......                                                [ 43%]
+---
+> test_login.py F...F......                                                [ 43%]
+14,15c14,15
+< test_products.py ........................                                [ 65%]
+< test_regression.py .............F..F.....................F...........    [100%]
+---
+> test_products.py ......................FF                                [ 65%]
+> test_regression.py .............F..F............F........F...........    [100%]
