@@ -1,5 +1,6 @@
 import json
 from typing import Union
+from unittest.mock import patch
 
 
 # Alter the details for a user
@@ -13,8 +14,7 @@ def change_details(entry):
             "Which detail do you want to alter? (p: password, a: address, ph: phone, e: email, c: credit card):\n"
         )
 
-        #Switch statement for the different details
-
+        # Switch statement for the different details
         if detail == "p":
             altered_pass = input("Enter a new password:")
             entry["password"] = altered_pass
@@ -30,14 +30,13 @@ def change_details(entry):
             entry["email"] = altered_email
         elif detail == "c":
             new_credit = {
-            "number": input("Enter a new credit card number:"),
-            "expiry": input("Enter a new credit card expiry date:"),
-            "cvv": input("Enter a new credit card CVV:"),
+                "number": input("Enter a new credit card number:"),
+                "expiry": input("Enter a new credit card expiry date:"),
+                "cvv": input("Enter a new credit card CVV:"),
             }
             entry["credit"] = new_credit
         else:
             return None
-
 
         print("The details have successfully been changed to: \n")
         print(entry)
