@@ -1,0 +1,176 @@
+--- logfile1.log	2024-01-02 16:47:29
++++ logfile2.log	2024-01-02 17:08:34
+@@ -5,109 +5,68 @@
+ plugins: mock-3.12.0
+ collecting ... collected 63 items
+ 
+-test_regression_suite_copy.py::test_login_existing_user_correct_password PASSED [  1%]
+-test_regression_suite_copy.py::test_login_existing_user_incorrect_password PASSED [  3%]
+-test_regression_suite_copy.py::test_login_new_user_no_register PASSED    [  4%]
+-test_regression_suite_copy.py::test_login_new_user_register_valid_password PASSED [  6%]
+-test_regression_suite_copy.py::test_login_new_user_register_invalid_password PASSED [  7%]
+-test_regression_suite_copy.py::test_check_password_no_capital PASSED     [  9%]
+-test_regression_suite_copy.py::test_check_password_no_numerical PASSED   [ 11%]
+-test_regression_suite_copy.py::test_check_password_too_short PASSED      [ 12%]
+-test_regression_suite_copy.py::test_check_password_no_special_char PASSED [ 14%]
+-test_regression_suite_copy.py::test_check_password_valid PASSED          [ 15%]
+-test_regression_suite_copy.py::test_logout_empty_cart PASSED             [ 17%]
+-test_regression_suite_copy.py::test_logout_non_empty_cart_no_confirmation PASSED [ 19%]
+-test_regression_suite_copy.py::test_logout_non_empty_cart_with_confirmation PASSED [ 20%]
+-test_regression_suite_copy.py::test_logout_string_input PASSED           [ 22%]
+-test_regression_suite_copy.py::test_logout_empty_input PASSED            [ 23%]
+-test_regression_suite_copy.py::test_display_csv_as_table PASSED          [ 25%]
+-test_regression_suite_copy.py::test_display_csv_as_table_row_count PASSED [ 26%]
+-test_regression_suite_copy.py::test_display_csv_as_table_column_count PASSED [ 28%]
+-test_regression_suite_copy.py::test_display_csv_as_table_with_pdf_file PASSED [ 30%]
+-test_regression_suite_copy.py::test_display_csv_as_table_none_input PASSED [ 31%]
+-test_regression_suite_copy.py::test_display_filtered_csv_as_table PASSED [ 33%]
+-test_regression_suite_copy.py::test_display_filtered_csv_as_table_row_count PASSED [ 34%]
+-test_regression_suite_copy.py::test_display_filtered_csv_as_table_ignore_case PASSED [ 36%]
+-test_regression_suite_copy.py::test_display_filtered_csv_as_table_invalid_search_parameter PASSED [ 38%]
+-test_regression_suite_copy.py::test_display_filtered_csv_as_table_empty_search_parameter PASSED [ 39%]
+-test_regression_suite_copy.py::test_search_and_buy_product_all PASSED    [ 41%]
+-test_regression_suite_copy.py::test_search_and_buy_products_filtered PASSED [ 42%]
+-test_regression_suite_copy.py::test_load_products_from_csv_optimal PASSED [ 44%]
+-test_regression_suite_copy.py::test_load_products_from_csv_body_less PASSED [ 46%]
+-test_regression_suite_copy.py::test_load_products_from_csv_head_less PASSED [ 47%]
+-test_regression_suite_copy.py::test_load_products_from_csv_edge PASSED   [ 49%]
+-test_regression_suite_copy.py::test_load_products_from_csv_non_existent_file PASSED [ 50%]
+-test_regression_suite_copy.py::test_checkout_empty PASSED                [ 52%]
+-test_regression_suite_copy.py::test_checkout_single PASSED               [ 53%]
+-test_regression_suite_copy.py::test_checkout_multiple PASSED             [ 55%]
+-test_regression_suite_copy.py::test_checkout_insufficient_funds PASSED   [ 57%]
+-test_regression_suite_copy.py::test_checkout_sufficient_funds PASSED     [ 58%]
+-test_regression_suite_copy.py::test_check_cart_input_no PASSED           [ 60%]
+-test_regression_suite_copy.py::test_check_cart_input_yes_wrong_case PASSED [ 61%]
+-test_regression_suite_copy.py::test_check_cart_empty_cart PASSED         [ 63%]
+-test_regression_suite_copy.py::test_check_cart_insufficient_funds PASSED [ 65%]
+-test_regression_suite_copy.py::test_check_cart_invalid_input PASSED      [ 66%]
+-test_regression_suite_copy.py::test_update_users_json_existing_user PASSED [ 68%]
+-test_regression_suite_copy.py::test_update_users_json_new_user PASSED    [ 69%]
+-test_regression_suite_copy.py::test_update_users_json_exceptions PASSED  [ 71%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[invalid_string] PASSED [ 73%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[12345] PASSED [ 74%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[4.56] PASSED [ 76%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[invalid_login_info3] PASSED [ 77%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[invalid_login_info4] PASSED [ 79%]
+-test_regression_suite_copy.py::test_checkout_and_payment_invalid_login_info[invalid_login_info5] PASSED [ 80%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value0-You have been logged out.] PASSED [ 82%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value1-You have been logged out.] PASSED [ 84%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value2-Apple added to your cart.] PASSED [ 85%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value3-\nInvalid input. Please try again.] PASSED [ 87%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value4-\nInvalid input. Please try again.] PASSED [ 88%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value5-\nInvalid input. Please try again.] PASSED [ 90%]
+-test_regression_suite_copy.py::test_checkout_and_payment_scenarios[mock_input_value6-\nInvalid input. Please try again.] PASSED [ 92%]
+-test_regression_suite_copy.py::test_checkout_and_payment_print_products PASSED [ 93%]
+-test_regression_suite_copy.py::test_checkout_and_payment_session_management PASSED [ 95%]
+-test_regression_suite_copy.py::test_display_and_select_card_success FAILED [ 96%]
+-test_regression_suite_copy.py::test_display_and_select_card_cancel FAILED [ 98%]
+-test_regression_suite_copy.py::test_display_and_select_card_insufficient_balance FAILED [100%]
++test_regression_suite.py::test_login_existing_user_correct_password PASSED [  1%]
++test_regression_suite.py::test_login_existing_user_incorrect_password PASSED [  3%]
++test_regression_suite.py::test_login_new_user_no_register PASSED         [  4%]
++test_regression_suite.py::test_login_new_user_register_valid_password PASSED [  6%]
++test_regression_suite.py::test_login_new_user_register_invalid_password PASSED [  7%]
++test_regression_suite.py::test_check_password_no_capital PASSED          [  9%]
++test_regression_suite.py::test_check_password_no_numerical PASSED        [ 11%]
++test_regression_suite.py::test_check_password_too_short PASSED           [ 12%]
++test_regression_suite.py::test_check_password_no_special_char PASSED     [ 14%]
++test_regression_suite.py::test_check_password_valid PASSED               [ 15%]
++test_regression_suite.py::test_logout_empty_cart PASSED                  [ 17%]
++test_regression_suite.py::test_logout_non_empty_cart_no_confirmation PASSED [ 19%]
++test_regression_suite.py::test_logout_non_empty_cart_with_confirmation PASSED [ 20%]
++test_regression_suite.py::test_logout_string_input PASSED                [ 22%]
++test_regression_suite.py::test_logout_empty_input PASSED                 [ 23%]
++test_regression_suite.py::test_display_csv_as_table PASSED               [ 25%]
++test_regression_suite.py::test_display_csv_as_table_row_count PASSED     [ 26%]
++test_regression_suite.py::test_display_csv_as_table_column_count PASSED  [ 28%]
++test_regression_suite.py::test_display_csv_as_table_with_pdf_file PASSED [ 30%]
++test_regression_suite.py::test_display_csv_as_table_none_input PASSED    [ 31%]
++test_regression_suite.py::test_display_filtered_csv_as_table PASSED      [ 33%]
++test_regression_suite.py::test_display_filtered_csv_as_table_row_count PASSED [ 34%]
++test_regression_suite.py::test_display_filtered_csv_as_table_ignore_case PASSED [ 36%]
++test_regression_suite.py::test_display_filtered_csv_as_table_invalid_search_parameter PASSED [ 38%]
++test_regression_suite.py::test_display_filtered_csv_as_table_empty_search_parameter PASSED [ 39%]
++test_regression_suite.py::test_search_and_buy_product_all PASSED         [ 41%]
++test_regression_suite.py::test_search_and_buy_products_filtered PASSED   [ 42%]
++test_regression_suite.py::test_load_products_from_csv_optimal PASSED     [ 44%]
++test_regression_suite.py::test_load_products_from_csv_body_less PASSED   [ 46%]
++test_regression_suite.py::test_load_products_from_csv_head_less PASSED   [ 47%]
++test_regression_suite.py::test_load_products_from_csv_edge PASSED        [ 49%]
++test_regression_suite.py::test_load_products_from_csv_non_existent_file PASSED [ 50%]
++test_regression_suite.py::test_checkout_empty PASSED                     [ 52%]
++test_regression_suite.py::test_checkout_single PASSED                    [ 53%]
++test_regression_suite.py::test_checkout_multiple PASSED                  [ 55%]
++test_regression_suite.py::test_checkout_insufficient_funds PASSED        [ 57%]
++test_regression_suite.py::test_checkout_sufficient_funds PASSED          [ 58%]
++test_regression_suite.py::test_check_cart_input_no PASSED                [ 60%]
++test_regression_suite.py::test_check_cart_input_yes_wrong_case PASSED    [ 61%]
++test_regression_suite.py::test_check_cart_empty_cart PASSED              [ 63%]
++test_regression_suite.py::test_check_cart_insufficient_funds PASSED      [ 65%]
++test_regression_suite.py::test_check_cart_invalid_input PASSED           [ 66%]
++test_regression_suite.py::test_update_users_json_existing_user PASSED    [ 68%]
++test_regression_suite.py::test_update_users_json_new_user PASSED         [ 69%]
++test_regression_suite.py::test_update_users_json_exceptions PASSED       [ 71%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_string] PASSED [ 73%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[12345] PASSED [ 74%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[4.56] PASSED [ 76%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info3] PASSED [ 77%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info4] PASSED [ 79%]
++test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info5] PASSED [ 80%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value0-You have been logged out.] PASSED [ 82%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value1-You have been logged out.] PASSED [ 84%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value2-Apple added to your cart.] PASSED [ 85%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value3-\nInvalid input. Please try again.] PASSED [ 87%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value4-\nInvalid input. Please try again.] PASSED [ 88%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value5-\nInvalid input. Please try again.] PASSED [ 90%]
++test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value6-\nInvalid input. Please try again.] PASSED [ 92%]
++test_regression_suite.py::test_checkout_and_payment_print_products PASSED [ 93%]
++test_regression_suite.py::test_checkout_and_payment_session_management PASSED [ 95%]
++test_regression_suite.py::test_display_and_select_card_success PASSED    [ 96%]
++test_regression_suite.py::test_display_and_select_card_cancel PASSED     [ 98%]
++test_regression_suite.py::test_display_and_select_card_insufficient_balance PASSED [100%]
+ 
+-=================================== FAILURES ===================================
+-_____________________ test_display_and_select_card_success _____________________
+-
+-user_1 = <checkout_and_payment.User object at 0x101f75e80>
+-mocker = <pytest_mock.plugin.MockerFixture object at 0x101f772c0>
+-
+-    def test_display_and_select_card_success(user_1, mocker):
+-        mocker.patch("builtins.input", side_effect=["1"])
+->       assert display_and_select_card(user_1, 50) is True
+-E       assert None is True
+-E        +  where None = display_and_select_card(<checkout_and_payment.User object at 0x101f75e80>, 50)
+-
+-test_regression_suite_copy.py:1114: AssertionError
+-_____________________ test_display_and_select_card_cancel ______________________
+-
+-user_1 = <checkout_and_payment.User object at 0x101dbd670>
+-mocker = <pytest_mock.plugin.MockerFixture object at 0x101dbd280>
+-
+-    def test_display_and_select_card_cancel(user_1, mocker):
+-        mocker.patch("builtins.input", side_effect=["c"])
+->       assert display_and_select_card(user_1, 50) is False
+-E       assert None is False
+-E        +  where None = display_and_select_card(<checkout_and_payment.User object at 0x101dbd670>, 50)
+-
+-test_regression_suite_copy.py:1119: AssertionError
+-______________ test_display_and_select_card_insufficient_balance _______________
+-
+-user_1 = <checkout_and_payment.User object at 0x101f8ad80>
+-mocker = <pytest_mock.plugin.MockerFixture object at 0x101f8ac90>
+-
+-    def test_display_and_select_card_insufficient_balance(user_1, mocker):
+-        mocker.patch("builtins.input", side_effect=["1"])
+->       assert display_and_select_card(user_1, 50) is False
+-E       assert None is False
+-E        +  where None = display_and_select_card(<checkout_and_payment.User object at 0x101f8ad80>, 50)
+-
+-test_regression_suite_copy.py:1124: AssertionError
+-=========================== short test summary info ============================
+-FAILED test_regression_suite_copy.py::test_display_and_select_card_success - ...
+-FAILED test_regression_suite_copy.py::test_display_and_select_card_cancel - a...
+-FAILED test_regression_suite_copy.py::test_display_and_select_card_insufficient_balance
+-========================= 3 failed, 60 passed in 0.11s =========================
++============================== 63 passed in 0.09s ==============================

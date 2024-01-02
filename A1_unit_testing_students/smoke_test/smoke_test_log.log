@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.1, pytest-7.4.3, pluggy-1.3.0 -- /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/pthathsarani/PycharmProjects/SoftwareTestingA1-Group11/A1_unit_testing_students
+plugins: mock-3.12.0
+collecting ... collected 10 items
+
+test_smoke_test.py::test_smoke_check_password_valid PASSED               [ 10%]
+test_smoke_test.py::test_smoke_check_password_no_capital PASSED          [ 20%]
+test_smoke_test.py::test_smoke_check_password_no_numeral PASSED          [ 30%]
+test_smoke_test.py::test_smoke_check_password_too_short PASSED           [ 40%]
+test_smoke_test.py::test_smoke_check_password_no_special_char PASSED     [ 50%]
+test_smoke_test.py::test_smoke_login_existing_user_correct_password PASSED [ 60%]
+test_smoke_test.py::test_smoke_login_existing_user_incorrect_password PASSED [ 70%]
+test_smoke_test.py::test_smoke_checkout_and_payment_with_items PASSED    [ 80%]
+test_smoke_test.py::test_smoke_checkout_and_payment_without_items PASSED [ 90%]
+test_smoke_test.py::test_smoke_checkout_and_payment_invalid_choice PASSED [100%]
+
+============================== 10 passed in 0.02s ==============================

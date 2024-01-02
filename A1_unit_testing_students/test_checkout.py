@@ -6,6 +6,7 @@ from checkout_and_payment import (
     ShoppingCart,
     checkout,
     check_cart,
+    display_and_select_card,
     products,
 )
 from unittest.mock import patch
@@ -24,6 +25,14 @@ def user_2():
 @pytest.fixture
 def user_3():
     return User("Test_Exakt", 1)
+
+@pytest.fixture
+def user_4():
+    return User("Test_Exakt", 1000, [{"name": "Card1", "balance": 100}, {"name": "Card2", "balance": 200}])
+
+@pytest.fixture
+def user_5():
+    return User("Test_Exakt", 1000, [{"name": "Card1", "balance": 30}, {"name": "Card2", "balance": 200}])
 
 
 @pytest.fixture
@@ -180,3 +189,20 @@ def test_checkout_wallet_update(user_2, filled_cart):
     cost = wallet - price
     # Assert that the remaining money in the wallet wallet is correct
     assert (cost == user_2.wallet)
+
+"""New test cases for payment method card feature"""
+def test_display_and_select_card_success(user_4, mocker):
+    mocker.patch("builtins.input", side_effect=["1"])
+    assert display_and_select_card(user_4, 50) is True
+
+
+def test_display_and_select_card_cancel(user_4, mocker):
+    mocker.patch("builtins.input", side_effect=["c"])
+    assert display_and_select_card(user_4, 50) is False
+    assert user_4.cards == [{"name": "Card1", "balance": 100}, {"name": "Card2", "balance": 200}]
+
+# Test case for insufficient balance in the selected card
+def test_display_and_select_card_insufficient_balance(user_5, mocker):
+    mocker.patch("builtins.input", side_effect=["1"])
+    assert display_and_select_card(user_5, 50) is False
+    assert user_5.cards == [{"name": "Card1", "balance": 30}, {"name": "Card2", "balance": 200}]

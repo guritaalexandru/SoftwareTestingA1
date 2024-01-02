@@ -5,9 +5,10 @@ from logout import logout
 
 #User class to represent user information
 class User:
-    def __init__(self, name, wallet):
+    def __init__(self, name, wallet, cards):
         self.name = name
         self.wallet = float(wallet)
+        self.cards = cards
 
 #Product class to represent product information
 class Product:
@@ -66,14 +67,24 @@ def checkout(user, cart):
 
     total_price = cart.get_total_price()
 
-    if total_price > user.wallet:
-        print("\n")
-        print(f"You don't have enough money to complete the purchase.")
-        print("Please try again!")
-        return False
+    payment_method_input = input("Do you want to use your wallet(w) or card(c): (w for wallet and c for card)?")
 
-    # Deduct the total price from the user's wallet
-    user.wallet -= total_price
+    if payment_method_input == 'w':
+        if total_price > user.wallet:
+            print("\n")
+            print(f"You don't have enough money to complete the purchase.")
+            print("Please try again!")
+            return False
+
+        # Deduct the total price from the user's wallet
+        user.wallet -= total_price
+    elif payment_method_input == 'c':
+        if display_and_select_card(user, total_price) == False:
+            return False
+    else:
+        print("\nInvalid input.")
+        return False
+    
     # Update product units and remove products with zero units
     for item in cart.items:
         item.units -= 1
@@ -86,6 +97,36 @@ def checkout(user, cart):
     print("\n")
     print(f"Thank you for your purchase, {user.name}! Your remaining balance is {user.wallet}")
     return True
+
+
+def display_and_select_card(user, total_price):
+    while True:
+        print("\n")
+        print("#\tCard Name\tBalance")
+        card_idx = 1
+        for i, card in enumerate(user.cards):
+            print(f"{card_idx}\t{card['name']}\t{card['balance']}")
+            card_idx += 1
+        print("\n")
+        input_card_choice = input("Please input card # from above table to proceed and c for cancel: ")
+        if input_card_choice == 'c':
+            print("\n")
+            print("Canceled purchase by card, Please try again!")
+            return False
+        elif input_card_choice.isdigit() and 0 < int(input_card_choice) <= card_idx:
+            selected_card = user.cards[int(input_card_choice)-1]
+            if total_price > selected_card['balance']:
+                print("\n")
+                print(f"You don't have enough balance in the card to complete the purchase.")
+                print("Please try again!")
+                return False
+            else:
+                selected_card['balance'] -= total_price
+                user.cards[int(input_card_choice)-1] = selected_card
+            return True
+        else:
+            print("\nInvalid input. Please try again.")
+
     
 # Function to check the cart and proceed to checkout if requested
 def check_cart(user, cart):
@@ -99,8 +140,8 @@ def check_cart(user, cart):
     else:
         return False
 
-# Function to update the users.json file
-def update_users_json(username, new_wallet, file_path="users.json"):
+# Function to update the users json file
+def update_users_json(username, new_wallet, cards, file_path="users_with_cards.json"):
     try:
         # Read the existing users from the file
         with open(file_path, "r") as file:
@@ -114,11 +155,12 @@ def update_users_json(username, new_wallet, file_path="users.json"):
         for user in users:
             if user["username"] == username:
                 user["wallet"] = new_wallet
+                user["cards"] = cards
                 user_found = True
                 break
 
         if not user_found:
-            users.append({"username": username, "wallet": new_wallet})
+            users.append({"username": username, "wallet": new_wallet, "cards": cards})
 
         # Write the updated users back to the file
         with open(file_path, "w") as file:
@@ -135,7 +177,7 @@ def checkoutAndPayment(login_info):
     if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
         raise TypeError("Invalid login_info format")
     # Create/retrieve a user using login information
-    user = User(login_info["username"], login_info["wallet"])
+    user = User(login_info["username"], login_info["wallet"], login_info["cards"])
     purchase_made = False
     # Display available products
     for i, product in enumerate(products):
@@ -158,7 +200,7 @@ def checkoutAndPayment(login_info):
             ask_logout = logout(cart)
             if ask_logout is True:
                 if purchase_made is True:
-                    update_users_json(user.name, user.wallet)
+                    update_users_json(user.name, user.wallet, user.cards)
                 print("You have been logged out.")
                 break
             else:

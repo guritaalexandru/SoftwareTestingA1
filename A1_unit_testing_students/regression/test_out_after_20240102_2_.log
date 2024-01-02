@@ -1,0 +1,826 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.1, pytest-7.4.3, pluggy-1.3.0 -- /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/pthathsarani/PycharmProjects/SoftwareTestingA1-Group11/A1_unit_testing_students
+plugins: mock-3.12.0
+collecting ... collected 63 items
+
+test_regression_suite.py::test_login_existing_user_correct_password FAILED [  1%]
+test_regression_suite.py::test_login_existing_user_incorrect_password PASSED [  3%]
+test_regression_suite.py::test_login_new_user_no_register PASSED         [  4%]
+test_regression_suite.py::test_login_new_user_register_valid_password FAILED [  6%]
+test_regression_suite.py::test_login_new_user_register_invalid_password PASSED [  7%]
+test_regression_suite.py::test_check_password_no_capital PASSED          [  9%]
+test_regression_suite.py::test_check_password_no_numerical PASSED        [ 11%]
+test_regression_suite.py::test_check_password_too_short PASSED           [ 12%]
+test_regression_suite.py::test_check_password_no_special_char PASSED     [ 14%]
+test_regression_suite.py::test_check_password_valid PASSED               [ 15%]
+test_regression_suite.py::test_logout_empty_cart PASSED                  [ 17%]
+test_regression_suite.py::test_logout_non_empty_cart_no_confirmation PASSED [ 19%]
+test_regression_suite.py::test_logout_non_empty_cart_with_confirmation PASSED [ 20%]
+test_regression_suite.py::test_logout_string_input PASSED                [ 22%]
+test_regression_suite.py::test_logout_empty_input PASSED                 [ 23%]
+test_regression_suite.py::test_display_csv_as_table PASSED               [ 25%]
+test_regression_suite.py::test_display_csv_as_table_row_count PASSED     [ 26%]
+test_regression_suite.py::test_display_csv_as_table_column_count PASSED  [ 28%]
+test_regression_suite.py::test_display_csv_as_table_with_pdf_file PASSED [ 30%]
+test_regression_suite.py::test_display_csv_as_table_none_input PASSED    [ 31%]
+test_regression_suite.py::test_display_filtered_csv_as_table PASSED      [ 33%]
+test_regression_suite.py::test_display_filtered_csv_as_table_row_count PASSED [ 34%]
+test_regression_suite.py::test_display_filtered_csv_as_table_ignore_case PASSED [ 36%]
+test_regression_suite.py::test_display_filtered_csv_as_table_invalid_search_parameter PASSED [ 38%]
+test_regression_suite.py::test_display_filtered_csv_as_table_empty_search_parameter PASSED [ 39%]
+test_regression_suite.py::test_search_and_buy_product_all FAILED         [ 41%]
+test_regression_suite.py::test_search_and_buy_products_filtered FAILED   [ 42%]
+test_regression_suite.py::test_load_products_from_csv_optimal PASSED     [ 44%]
+test_regression_suite.py::test_load_products_from_csv_body_less PASSED   [ 46%]
+test_regression_suite.py::test_load_products_from_csv_head_less PASSED   [ 47%]
+test_regression_suite.py::test_load_products_from_csv_edge PASSED        [ 49%]
+test_regression_suite.py::test_load_products_from_csv_non_existent_file PASSED [ 50%]
+test_regression_suite.py::test_checkout_empty ERROR                      [ 52%]
+test_regression_suite.py::test_checkout_single ERROR                     [ 53%]
+test_regression_suite.py::test_checkout_multiple ERROR                   [ 55%]
+test_regression_suite.py::test_checkout_insufficient_funds ERROR         [ 57%]
+test_regression_suite.py::test_checkout_sufficient_funds ERROR           [ 58%]
+test_regression_suite.py::test_check_cart_input_no ERROR                 [ 60%]
+test_regression_suite.py::test_check_cart_input_yes_wrong_case ERROR     [ 61%]
+test_regression_suite.py::test_check_cart_empty_cart ERROR               [ 63%]
+test_regression_suite.py::test_check_cart_insufficient_funds ERROR       [ 65%]
+test_regression_suite.py::test_check_cart_invalid_input ERROR            [ 66%]
+test_regression_suite.py::test_update_users_json_existing_user FAILED    [ 68%]
+test_regression_suite.py::test_update_users_json_new_user FAILED         [ 69%]
+test_regression_suite.py::test_update_users_json_exceptions FAILED       [ 71%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_string] PASSED [ 73%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[12345] PASSED [ 74%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[4.56] PASSED [ 76%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info3] PASSED [ 77%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info4] PASSED [ 79%]
+test_regression_suite.py::test_checkout_and_payment_invalid_login_info[invalid_login_info5] PASSED [ 80%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value0-You have been logged out.] FAILED [ 82%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value1-You have been logged out.] FAILED [ 84%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value2-Apple added to your cart.] FAILED [ 85%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value3-\nInvalid input. Please try again.] FAILED [ 87%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value4-\nInvalid input. Please try again.] FAILED [ 88%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value5-\nInvalid input. Please try again.] FAILED [ 90%]
+test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value6-\nInvalid input. Please try again.] FAILED [ 92%]
+test_regression_suite.py::test_checkout_and_payment_print_products FAILED [ 93%]
+test_regression_suite.py::test_checkout_and_payment_session_management FAILED [ 95%]
+test_regression_suite.py::test_display_and_select_card_success PASSED    [ 96%]
+test_regression_suite.py::test_display_and_select_card_cancel PASSED     [ 98%]
+test_regression_suite.py::test_display_and_select_card_insufficient_balance PASSED [100%]
+
+==================================== ERRORS ====================================
+____________________ ERROR at setup of test_checkout_empty _____________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+____________________ ERROR at setup of test_checkout_single ____________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+___________________ ERROR at setup of test_checkout_multiple ___________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+______________ ERROR at setup of test_checkout_insufficient_funds ______________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+_______________ ERROR at setup of test_checkout_sufficient_funds _______________
+
+    @pytest.fixture
+    def user_2():
+>       return User("Test_Rich", 2000)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:222: TypeError
+__________________ ERROR at setup of test_check_cart_input_no __________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+____________ ERROR at setup of test_check_cart_input_yes_wrong_case ____________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+_________________ ERROR at setup of test_check_cart_empty_cart _________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+_____________ ERROR at setup of test_check_cart_insufficient_funds _____________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+_______________ ERROR at setup of test_check_cart_invalid_input ________________
+
+    @pytest.fixture
+    def user_1():
+>       return User("Test", 10)
+E       TypeError: User.__init__() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:217: TypeError
+=================================== FAILURES ===================================
+__________________ test_login_existing_user_correct_password ___________________
+
+    def test_login_existing_user_correct_password():
+        with patch('builtins.input', side_effect=valid_test_inputs):
+>           assert login() == {"username": valid_test_inputs[0], "wallet": 100}
+E           AssertionError: assert {'username': 'Ramanathan', 'wallet': 100.0, 'cards': [{'name': 'Card1', 'balance': 999.5}]} == {'username': 'Ramanathan', 'wallet': 100}
+E             Common items:
+E             {'username': 'Ramanathan', 'wallet': 100.0}
+E             Left contains 1 more item:
+E             {'cards': [{'balance': 999.5, 'name': 'Card1'}]}
+E             Full diff:
+E               {
+E             +  'cards': [{'balance': 999.5,
+E             +             'name': 'Card1'}],
+E                'username': 'Ramanathan',
+E             -  'wallet': 100,
+E             +  'wallet': 100.0,
+E             ?               ++
+E               }
+
+test_regression_suite.py:413: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Successfully logged in
+_________________ test_login_new_user_register_valid_password __________________
+
+write_to_file_stub = <MagicMock name='write_to_file' id='4335160784'>
+check_password_stub_correct = <MagicMock name='check_password' id='4335168368'>
+
+    def test_login_new_user_register_valid_password(write_to_file_stub, check_password_stub_correct):
+        with patch('builtins.input', side_effect=new_user_valid_password):
+>           assert login() == {"username": new_user_valid_password[0], "wallet": 0}
+E           AssertionError: assert {'username': 'NewUser', 'wallet': 0, 'cards': []} == {'username': 'NewUser', 'wallet': 0}
+E             Common items:
+E             {'username': 'NewUser', 'wallet': 0}
+E             Left contains 1 more item:
+E             {'cards': []}
+E             Full diff:
+E             - {'username': 'NewUser', 'wallet': 0}
+E             + {'cards': [], 'username': 'NewUser', 'wallet': 0}
+E             ?  +++++++++++++
+
+test_regression_suite.py:443: AssertionError
+----------------------------- Captured stdout call -----------------------------
+User does not exist. Would you like to register?
+Successfully registered
+_______________________ test_search_and_buy_product_all ________________________
+
+mock_login = <MagicMock name='login' id='4335287568'>
+check_password_stub_correct = <MagicMock name='check_password' id='4336817008'>
+mock_display_csv_as_table = <MagicMock name='display_csv_as_table' id='4337243760'>
+mock_checkout_and_payment = <MagicMock name='checkoutAndPayment' id='4335286272'>
+mock_input_all = <MagicMock name='input' id='4322838672'>
+mock_input_login = <MagicMock name='input' id='4337455312'>
+mock_input_checkout_and_payment = <MagicMock name='input' id='4337463088'>
+mock_open_users = <MagicMock name='open' id='4337595888'>
+
+    def test_search_and_buy_product_all(mock_login, check_password_stub_correct, mock_display_csv_as_table,
+                                        mock_checkout_and_payment,
+                                        mock_input_all, mock_input_login, mock_input_checkout_and_payment, mock_open_users):
+>       searchAndBuyProduct()
+
+test_regression_suite.py:742: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+products.py:52: in searchAndBuyProduct
+    checkoutAndPayment(login_info)
+checkout_and_payment.py:188: in checkoutAndPayment
+    choice = input("\nEnter the product number you want to add to your cart (c to check cart, l to logout): ")
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1134: in __call__
+    return self._mock_call(*args, **kwargs)
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1138: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='input' id='4337463088'>
+args = ('\nEnter the product number you want to add to your cart (c to check cart, l to logout): ',)
+kwargs = {}, effect = <list_iterator object at 0x102887e20>
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+                raise effect
+            elif not _callable(effect):
+>               result = next(effect)
+E               StopIteration
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1195: StopIteration
+----------------------------- Captured stdout call -----------------------------
+Successfully logged in
+1. Apple - $2.0 - Units: 10
+2. Banana - $1.0 - Units: 15
+3. Orange - $1.5 - Units: 8
+4. Grapes - $3.0 - Units: 5
+5. Strawberry - $4.0 - Units: 12
+6. Watermelon - $10.0 - Units: 1
+7. Carrot - $0.5 - Units: 20
+8. Broccoli - $1.5 - Units: 10
+9. Tomato - $1.0 - Units: 15
+10. Cucumber - $1.0 - Units: 12
+11. Potato - $0.75 - Units: 18
+12. Onion - $0.8 - Units: 20
+13. Bell Pepper - $1.2 - Units: 8
+14. Lettuce - $2.0 - Units: 5
+15. Spinach - $2.5 - Units: 7
+16. Milk - $3.0 - Units: 10
+17. Eggs - $2.0 - Units: 24
+18. Cheese - $5.0 - Units: 8
+19. Chicken Breast - $7.0 - Units: 4
+20. Salmon - $10.0 - Units: 2
+21. Ground Beef - $6.0 - Units: 5
+22. Pasta - $1.0 - Units: 15
+23. Rice - $1.5 - Units: 10
+24. Bread - $2.0 - Units: 8
+25. Butter - $3.0 - Units: 6
+26. Yogurt - $2.0 - Units: 12
+27. Ice Cream - $4.0 - Units: 6
+28. Chocolate - $2.5 - Units: 8
+29. Coffee - $5.0 - Units: 4
+30. Tea - $2.0 - Units: 10
+31. Soda - $1.5 - Units: 12
+32. Water - $1.0 - Units: 20
+33. Juice - $3.0 - Units: 8
+34. Chips - $2.5 - Units: 10
+35. Cookies - $3.0 - Units: 8
+36. Cereal - $2.0 - Units: 12
+37. Oatmeal - $1.5 - Units: 15
+38. Peanut Butter - $3.0 - Units: 6
+39. Jelly - $2.0 - Units: 8
+40. Toothpaste - $1.5 - Units: 10
+41. Shampoo - $2.0 - Units: 8
+42. Soap - $1.0 - Units: 12
+43. Toilet Paper - $0.75 - Units: 24
+44. Towel - $4.0 - Units: 6
+45. Laundry Detergent - $3.5 - Units: 8
+46. Dish Soap - $1.5 - Units: 12
+47. Broom - $5.0 - Units: 4
+48. Trash Bags - $2.0 - Units: 10
+49. Light Bulbs - $1.0 - Units: 15
+50. Batteries - $3.0 - Units: 6
+51. Phone Charger - $5.0 - Units: 4
+52. Laptop - $800.0 - Units: 1
+53. Headphones - $50.0 - Units: 1
+54. Bluetooth Speaker - $30.0 - Units: 1
+55. TV - $500.0 - Units: 1
+56. Microwave - $80.0 - Units: 1
+57. Coffee Maker - $40.0 - Units: 1
+58. Toaster - $20.0 - Units: 1
+59. Blender - $30.0 - Units: 1
+60. Vacuum Cleaner - $100.0 - Units: 1
+61. Dumbbells - $20.0 - Units: 2
+62. Yoga Mat - $15.0 - Units: 1
+63. Running Shoes - $60.0 - Units: 1
+64. Backpack - $25.0 - Units: 1
+65. Sunglasses - $10.0 - Units: 1
+66. Hat - $8.0 - Units: 1
+67. Gloves - $5.0 - Units: 1
+68. Umbrella - $7.0 - Units: 1
+69. Notebook - $2.0 - Units: 5
+70. Pens - $0.5 - Units: 10
+71. Backpack - $15.0 - Units: 1
+Apple added to your cart.
+['Apple', 2.0, 10]
+
+Invalid input.
+____________________ test_search_and_buy_products_filtered _____________________
+
+mock_login = <MagicMock name='login' id='4337246880'>
+check_password_stub_correct = <MagicMock name='check_password' id='4335272304'>
+mock_checkout_and_payment = <MagicMock name='checkoutAndPayment' id='4335252736'>
+mock_display_filtered_table = <MagicMock name='display_filtered_table' id='4335242608'>
+mock_input_filtered = <MagicMock name='input' id='4335295552'>
+mock_input_login = <MagicMock name='input' id='4335303760'>
+mock_input_checkout_and_payment = <MagicMock name='input' id='4334607664'>
+mock_open_users = <MagicMock name='open' id='4337340624'>
+
+    def test_search_and_buy_products_filtered(mock_login, check_password_stub_correct,
+                                              mock_checkout_and_payment, mock_display_filtered_table,
+                                              mock_input_filtered, mock_input_login, mock_input_checkout_and_payment,
+                                              mock_open_users):
+>       searchAndBuyProduct()
+
+test_regression_suite.py:754: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+products.py:52: in searchAndBuyProduct
+    checkoutAndPayment(login_info)
+checkout_and_payment.py:188: in checkoutAndPayment
+    choice = input("\nEnter the product number you want to add to your cart (c to check cart, l to logout): ")
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1134: in __call__
+    return self._mock_call(*args, **kwargs)
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1138: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <MagicMock name='input' id='4334607664'>
+args = ('\nEnter the product number you want to add to your cart (c to check cart, l to logout): ',)
+kwargs = {}, effect = <list_iterator object at 0x1026570a0>
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+                raise effect
+            elif not _callable(effect):
+>               result = next(effect)
+E               StopIteration
+
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:1195: StopIteration
+----------------------------- Captured stdout call -----------------------------
+Successfully logged in
+1. Apple - $2.0 - Units: 10
+2. Banana - $1.0 - Units: 15
+3. Orange - $1.5 - Units: 8
+4. Grapes - $3.0 - Units: 5
+5. Strawberry - $4.0 - Units: 12
+6. Watermelon - $10.0 - Units: 1
+7. Carrot - $0.5 - Units: 20
+8. Broccoli - $1.5 - Units: 10
+9. Tomato - $1.0 - Units: 15
+10. Cucumber - $1.0 - Units: 12
+11. Potato - $0.75 - Units: 18
+12. Onion - $0.8 - Units: 20
+13. Bell Pepper - $1.2 - Units: 8
+14. Lettuce - $2.0 - Units: 5
+15. Spinach - $2.5 - Units: 7
+16. Milk - $3.0 - Units: 10
+17. Eggs - $2.0 - Units: 24
+18. Cheese - $5.0 - Units: 8
+19. Chicken Breast - $7.0 - Units: 4
+20. Salmon - $10.0 - Units: 2
+21. Ground Beef - $6.0 - Units: 5
+22. Pasta - $1.0 - Units: 15
+23. Rice - $1.5 - Units: 10
+24. Bread - $2.0 - Units: 8
+25. Butter - $3.0 - Units: 6
+26. Yogurt - $2.0 - Units: 12
+27. Ice Cream - $4.0 - Units: 6
+28. Chocolate - $2.5 - Units: 8
+29. Coffee - $5.0 - Units: 4
+30. Tea - $2.0 - Units: 10
+31. Soda - $1.5 - Units: 12
+32. Water - $1.0 - Units: 20
+33. Juice - $3.0 - Units: 8
+34. Chips - $2.5 - Units: 10
+35. Cookies - $3.0 - Units: 8
+36. Cereal - $2.0 - Units: 12
+37. Oatmeal - $1.5 - Units: 15
+38. Peanut Butter - $3.0 - Units: 6
+39. Jelly - $2.0 - Units: 8
+40. Toothpaste - $1.5 - Units: 10
+41. Shampoo - $2.0 - Units: 8
+42. Soap - $1.0 - Units: 12
+43. Toilet Paper - $0.75 - Units: 24
+44. Towel - $4.0 - Units: 6
+45. Laundry Detergent - $3.5 - Units: 8
+46. Dish Soap - $1.5 - Units: 12
+47. Broom - $5.0 - Units: 4
+48. Trash Bags - $2.0 - Units: 10
+49. Light Bulbs - $1.0 - Units: 15
+50. Batteries - $3.0 - Units: 6
+51. Phone Charger - $5.0 - Units: 4
+52. Laptop - $800.0 - Units: 1
+53. Headphones - $50.0 - Units: 1
+54. Bluetooth Speaker - $30.0 - Units: 1
+55. TV - $500.0 - Units: 1
+56. Microwave - $80.0 - Units: 1
+57. Coffee Maker - $40.0 - Units: 1
+58. Toaster - $20.0 - Units: 1
+59. Blender - $30.0 - Units: 1
+60. Vacuum Cleaner - $100.0 - Units: 1
+61. Dumbbells - $20.0 - Units: 2
+62. Yoga Mat - $15.0 - Units: 1
+63. Running Shoes - $60.0 - Units: 1
+64. Backpack - $25.0 - Units: 1
+65. Sunglasses - $10.0 - Units: 1
+66. Hat - $8.0 - Units: 1
+67. Gloves - $5.0 - Units: 1
+68. Umbrella - $7.0 - Units: 1
+69. Notebook - $2.0 - Units: 5
+70. Pens - $0.5 - Units: 10
+71. Backpack - $15.0 - Units: 1
+Apple added to your cart.
+['Apple', 2.0, 10]
+['Apple', 2.0, 10]
+
+Invalid input.
+_____________________ test_update_users_json_existing_user _____________________
+
+mock_open_users_file = <MagicMock name='open' id='4335373440'>
+
+    def test_update_users_json_existing_user(mock_open_users_file):
+        """Test updating an existing user's wallet amount in the JSON."""
+        with patch("builtins.open", mock_open_users_file) as mock_file:
+            content = capture_write_calls(mock_file())
+>           update_users_json("user1", 150)
+E           TypeError: update_users_json() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:995: TypeError
+_______________________ test_update_users_json_new_user ________________________
+
+mock_open_users_file = <MagicMock name='open' id='4335161168'>
+
+    def test_update_users_json_new_user(mock_open_users_file):
+        """Test adding a new user to the JSON."""
+        with patch("builtins.open", mock_open_users_file) as mock_file:
+            content = capture_write_calls(mock_file())
+>           update_users_json("new_user", 300)
+E           TypeError: update_users_json() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:1008: TypeError
+______________________ test_update_users_json_exceptions _______________________
+
+    def test_update_users_json_exceptions():
+        """Test the behavior of update_users_json with invalid input or file."""
+        with patch("builtins.open", mock_open(read_data="not valid json")), pytest.raises(ValueError):
+>           update_users_json("user1", 150)
+E           TypeError: update_users_json() missing 1 required positional argument: 'cards'
+
+test_regression_suite.py:1020: TypeError
+_ test_checkout_and_payment_scenarios[mock_input_value0-You have been logged out.] _
+
+mock_input_value = ['l'], expected_output = 'You have been logged out.'
+mock_input = <MagicMock name='input' id='4322733440'>
+mock_check_cart = <MagicMock name='check_cart' id='4337458912'>
+mock_logout = <MagicMock name='logout' id='4335366272'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337339040'>
+capsys = <_pytest.capture.CaptureFixture object at 0x1027c6630>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value1-You have been logged out.] _
+
+mock_input_value = ['c', 'l'], expected_output = 'You have been logged out.'
+mock_input = <MagicMock name='input' id='4336680400'>
+mock_check_cart = <MagicMock name='check_cart' id='4336666000'>
+mock_logout = <MagicMock name='logout' id='4337060944'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337069536'>
+capsys = <_pytest.capture.CaptureFixture object at 0x102878e00>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value2-Apple added to your cart.] _
+
+mock_input_value = ['1', 'c', 'l']
+expected_output = 'Apple added to your cart.'
+mock_input = <MagicMock name='input' id='4337407168'>
+mock_check_cart = <MagicMock name='check_cart' id='4337415232'>
+mock_logout = <MagicMock name='logout' id='4337587104'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337594976'>
+capsys = <_pytest.capture.CaptureFixture object at 0x102863d10>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value3-\nInvalid input. Please try again.] _
+
+mock_input_value = ['72', 'l']
+expected_output = '\nInvalid input. Please try again.'
+mock_input = <MagicMock name='input' id='4337464096'>
+mock_check_cart = <MagicMock name='check_cart' id='4337460352'>
+mock_logout = <MagicMock name='logout' id='4336673200'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4336822144'>
+capsys = <_pytest.capture.CaptureFixture object at 0x1027e9a90>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value4-\nInvalid input. Please try again.] _
+
+mock_input_value = ['apple', 'l']
+expected_output = '\nInvalid input. Please try again.'
+mock_input = <MagicMock name='input' id='4336826560'>
+mock_check_cart = <MagicMock name='check_cart' id='4337537376'>
+mock_logout = <MagicMock name='logout' id='4337533200'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4335172256'>
+capsys = <_pytest.capture.CaptureFixture object at 0x102655be0>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value5-\nInvalid input. Please try again.] _
+
+mock_input_value = ['0.75', 'l']
+expected_output = '\nInvalid input. Please try again.'
+mock_input = <MagicMock name='input' id='4335163568'>
+mock_check_cart = <MagicMock name='check_cart' id='4334610496'>
+mock_logout = <MagicMock name='logout' id='4335288048'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337348208'>
+capsys = <_pytest.capture.CaptureFixture object at 0x10286ade0>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_ test_checkout_and_payment_scenarios[mock_input_value6-\nInvalid input. Please try again.] _
+
+mock_input_value = ['[]', 'l']
+expected_output = '\nInvalid input. Please try again.'
+mock_input = <MagicMock name='input' id='4337348160'>
+mock_check_cart = <MagicMock name='check_cart' id='4335251632'>
+mock_logout = <MagicMock name='logout' id='4322506416'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337251392'>
+capsys = <_pytest.capture.CaptureFixture object at 0x102689010>
+
+    @pytest.mark.parametrize("mock_input_value, expected_output", [
+        (['l'], "You have been logged out."),
+        (['c', 'l'], "You have been logged out."),
+        (['1', 'c', 'l'], "Apple added to your cart."),
+        ([str(len(products) + 1), 'l'], "\nInvalid input. Please try again."),
+        (['apple', 'l'], "\nInvalid input. Please try again."),
+        (['0.75', 'l'], "\nInvalid input. Please try again."),
+        (['[]', 'l'], "\nInvalid input. Please try again.")
+    ])
+    def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test various scenarios in checkoutAndPayment based on different user inputs."""
+        mock_input.side_effect = mock_input_value
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1057: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+___________________ test_checkout_and_payment_print_products ___________________
+
+mock_input = <MagicMock name='input' id='4335372912'>
+mock_check_cart = <MagicMock name='check_cart' id='4337548080'>
+mock_logout = <MagicMock name='logout' id='4335164192'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4335168272'>
+capsys = <_pytest.capture.CaptureFixture object at 0x1027e9730>
+
+    def test_checkout_and_payment_print_products(mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test that all products are printed correctly in the checkout process."""
+        mock_input.side_effect = ['l']
+>       checkoutAndPayment({"username": "testuser", "wallet": 100})
+
+test_regression_suite.py:1070: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+_________________ test_checkout_and_payment_session_management _________________
+
+mock_input = <MagicMock name='input' id='4336818016'>
+mock_check_cart = <MagicMock name='check_cart' id='4336825120'>
+mock_logout = <MagicMock name='logout' id='4337462368'>
+mock_update_users_json = <MagicMock name='update_users_json' id='4337452336'>
+capsys = <_pytest.capture.CaptureFixture object at 0x1028a14c0>
+
+    def test_checkout_and_payment_session_management(mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+        """Test the management of user session in repeated calls of checkoutAndPayment."""
+        mock_input.side_effect = ['1', 'l', '2', 'l']
+        user_info = {"username": "testuser", "wallet": 100}
+    
+        # Test with two consecutive calls to simulate user session
+>       checkoutAndPayment(user_info)
+
+test_regression_suite.py:1088: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+login_info = {'username': 'testuser', 'wallet': 100}
+
+    def checkoutAndPayment(login_info):
+        # Check if login_info is a dictionary with the required keys
+        if not isinstance(login_info, dict) or 'username' not in login_info or 'wallet' not in login_info:
+            raise TypeError("Invalid login_info format")
+        # Create/retrieve a user using login information
+>       user = User(login_info["username"], login_info["wallet"], login_info["cards"])
+E       KeyError: 'cards'
+
+checkout_and_payment.py:179: KeyError
+=========================== short test summary info ============================
+FAILED test_regression_suite.py::test_login_existing_user_correct_password - ...
+FAILED test_regression_suite.py::test_login_new_user_register_valid_password
+FAILED test_regression_suite.py::test_search_and_buy_product_all - StopIteration
+FAILED test_regression_suite.py::test_search_and_buy_products_filtered - Stop...
+FAILED test_regression_suite.py::test_update_users_json_existing_user - TypeE...
+FAILED test_regression_suite.py::test_update_users_json_new_user - TypeError:...
+FAILED test_regression_suite.py::test_update_users_json_exceptions - TypeErro...
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value0-You have been logged out.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value1-You have been logged out.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value2-Apple added to your cart.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value3-\nInvalid input. Please try again.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value4-\nInvalid input. Please try again.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value5-\nInvalid input. Please try again.]
+FAILED test_regression_suite.py::test_checkout_and_payment_scenarios[mock_input_value6-\nInvalid input. Please try again.]
+FAILED test_regression_suite.py::test_checkout_and_payment_print_products - K...
+FAILED test_regression_suite.py::test_checkout_and_payment_session_management
+ERROR test_regression_suite.py::test_checkout_empty - TypeError: User.__init_...
+ERROR test_regression_suite.py::test_checkout_single - TypeError: User.__init...
+ERROR test_regression_suite.py::test_checkout_multiple - TypeError: User.__in...
+ERROR test_regression_suite.py::test_checkout_insufficient_funds - TypeError:...
+ERROR test_regression_suite.py::test_checkout_sufficient_funds - TypeError: U...
+ERROR test_regression_suite.py::test_check_cart_input_no - TypeError: User.__...
+ERROR test_regression_suite.py::test_check_cart_input_yes_wrong_case - TypeEr...
+ERROR test_regression_suite.py::test_check_cart_empty_cart - TypeError: User....
+ERROR test_regression_suite.py::test_check_cart_insufficient_funds - TypeErro...
+ERROR test_regression_suite.py::test_check_cart_invalid_input - TypeError: Us...
+=================== 16 failed, 37 passed, 10 errors in 0.32s ===================

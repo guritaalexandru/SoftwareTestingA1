@@ -1,3 +1,5 @@
-import login as login_functions
+# import login as login_functions
+import products as products
 
-login_functions.login()
+# login_functions.login()
+products.searchAndBuyProduct()

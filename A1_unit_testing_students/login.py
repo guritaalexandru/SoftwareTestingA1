@@ -21,7 +21,7 @@ def check_password(password):
 
 
 def write_to_file(data):
-    with open('users.json', 'w') as outfile:
+    with open('users_with_cards.json', 'w') as outfile:
         json.dump(data, outfile)
 
 
@@ -31,7 +31,7 @@ def login():
     password = input("Enter your password:")
 
     # Look for users in database
-    with open('users.json', "r") as file:
+    with open('users_with_cards.json', "r") as file:
         data = json.load(file)
         is_registered = False
 
@@ -40,7 +40,7 @@ def login():
             if entry["username"] == username:
                 if entry["password"] == password:
                     print("Successfully logged in")
-                    return {"username": entry["username"], "wallet": entry["wallet"]}
+                    return {"username": entry["username"], "wallet": entry["wallet"], "cards": entry["cards"]}
                 print("Either username or password were incorrect")
                 return None
 
@@ -54,10 +54,10 @@ def login():
             if not check_password(new_pass):
                 return None
 
-            data.append({"username": username, "password": new_pass, "wallet": 0})
+            data.append({"username": username, "password": new_pass, "wallet": 0, "cards": []})
             write_to_file(data)
 
             print("Successfully registered")
-            return {"username": username, "wallet": 0}
+            return {"username": username, "wallet": 0, "cards": []}
         else:
             return None
