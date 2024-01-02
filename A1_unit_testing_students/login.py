@@ -1,4 +1,5 @@
 import json
+from change_details import change_details
 
 
 # Check if password is valid
@@ -40,6 +41,16 @@ def login():
             if entry["username"] == username:
                 if entry["password"] == password:
                     print("Successfully logged in")
+                    result = change_details(entry)
+                    if result == None:
+                        return {"username": entry["username"], "wallet": entry["wallet"]}
+                    else:
+                        entry = result
+                        # Check if password is valid
+                        if not check_password(entry["password"]):
+                            return None
+ 
+                        write_to_file(data)
                     return {"username": entry["username"], "wallet": entry["wallet"]}
                 print("Either username or password were incorrect")
                 return None

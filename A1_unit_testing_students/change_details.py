@@ -1,6 +1,5 @@
 import json
 from typing import Union
-from login import check_password
 
 
 # Alter the details for a user
@@ -18,9 +17,6 @@ def change_details(entry):
 
         if detail == "p":
             altered_pass = input("Enter a new password:")
-            # Check if password is valid
-            if not check_password(altered_pass):
-                return None
             entry["password"] = altered_pass
 
         elif detail == "a":
@@ -43,7 +39,10 @@ def change_details(entry):
             return None
 
 
-        print("The details have successfully been changed to: " + entry)
+        print("The details have successfully been changed to: \n")
+        print(entry)
+
+        return entry
 
     else:
         return None
