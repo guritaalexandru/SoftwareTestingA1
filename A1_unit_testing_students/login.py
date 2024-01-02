@@ -53,8 +53,15 @@ def login():
             # Check if password is valid
             if not check_password(new_pass):
                 return None
+            
+            new_address = input("Enter a street address:")
+            new_phone = input("Enter a phone number:")
+            new_email = input("Enter an email address:")
+            new_credit = {"number": input("Enter a credit card number:"), "expiry": input("Enter a credit card expiry date:"), "cvv": input("Enter a credit card CVV:")}
 
-            data.append({"username": username, "password": new_pass, "wallet": 0})
+
+
+            data.append({"username": username, "password": new_pass, "wallet": 0, "address": new_address, "phone": new_phone, "email": new_email, "credit": new_credit})
             write_to_file(data)
 
             print("Successfully registered")
