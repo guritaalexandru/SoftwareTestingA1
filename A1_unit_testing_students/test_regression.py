@@ -1,6 +1,14 @@
 import io
 import pytest
-from checkout_and_payment import Product, User, ShoppingCart, checkout, check_cart, products as productz, load_products_from_csv 
+from checkout_and_payment import (
+    Product,
+    User,
+    ShoppingCart,
+    checkout,
+    check_cart,
+    products as productz,
+    load_products_from_csv,
+)
 from unittest.mock import patch, mock_open, MagicMock
 from logout import logout
 from login import login, check_password
@@ -8,26 +16,22 @@ import csv
 from products import display_csv_as_table, display_filtered_table, searchAndBuyProduct
 import json
 from checkout_and_payment import checkoutAndPayment, update_users_json
-
-
+from change_details import change_details
 
 
 ## Fixtures for check_cart
-
-
 @pytest.fixture
 def cart_1(products):
     cart = ShoppingCart()
     cart.items = products
     return cart
 
+
 @pytest.fixture
 def cart_2():
     cart = ShoppingCart()
     cart.clear_items()
     return cart
-
-
 
 
 @pytest.fixture
@@ -56,8 +60,8 @@ def csv_price():
     ]
     return data
 
-## Fixtures for login
 
+## Fixtures for login
 valid_test_inputs = ["Ramanathan", "Notaproblem23*"]
 invalid_test_inputs = ["Ramanathan", "Notaproblem23*!"]
 
@@ -70,18 +74,17 @@ new_user_invalid_password = ["NewUser", "", "Y", "invalidpassword"]
 
 @pytest.fixture
 def write_to_file_stub(mocker):
-    return mocker.patch('login.write_to_file', return_value=None)
+    return mocker.patch("login.write_to_file", return_value=None)
 
 
 @pytest.fixture
 def check_password_stub_incorrect(mocker):
-    return mocker.patch('login.check_password', return_value=False)
+    return mocker.patch("login.check_password", return_value=False)
 
 
 @pytest.fixture
 def check_password_stub_correct(mocker):
-    return mocker.patch('login.check_password', return_value=True)
-
+    return mocker.patch("login.check_password", return_value=True)
 
 
 @pytest.fixture
@@ -111,9 +114,8 @@ def csv_name():
     ]
     return data
 
+
 ## Fixtures for logout
-
-
 class Cart:
     def __init__(self):
         self.items = [1, 2, 3]
@@ -124,8 +126,8 @@ class Cart:
     def clear_items(self):
         pass
 
-## Fixtures for checkout
 
+## Fixtures for checkout
 @pytest.fixture
 def user_1():
     return User("Test", 10)
@@ -197,23 +199,29 @@ def multi_cart():
     cart.add_item(productz[4])
     return cart
 
-## Fixtures for products
 
-valid_csv_products = "Product,Price,Units\nProduct1,10,2\nProduct2,20,1\nProduct3,30,5\n"
-expected_output = ("['Product', 'Price', 'Units']\n['Product1', '10', '2']\n['Product2', '20', '1']\n['Product3', "
-                   "'30', '5']\n")
+## Fixtures for products
+valid_csv_products = (
+    "Product,Price,Units\nProduct1,10,2\nProduct2,20,1\nProduct3,30,5\n"
+)
+expected_output = (
+    "['Product', 'Price', 'Units']\n['Product1', '10', '2']\n['Product2', '20', '1']\n['Product3', "
+    "'30', '5']\n"
+)
 expected_filtered_output = "['Product', 'Price', 'Units']\n['Product1', '10', '2']\n"
 invalid_filtered_output = "['Product', 'Price', 'Units']\n"
+
 
 @pytest.fixture
 def temp_csv_file_stub():
     csv_file_path = "example.csv"
 
-    with open(csv_file_path, 'w', newline='') as csvfile:
+    with open(csv_file_path, "w", newline="") as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerows([row.split(',') for row in valid_csv_products.split('\n')])
+        csv_writer.writerows([row.split(",") for row in valid_csv_products.split("\n")])
 
     return csv_file_path
+
 
 valid_test_inputs = ["Ramanathan", "Notaproblem23*"]
 valid_checkout_and_payment_inputs = ["1", "c", "y", "l"]
@@ -223,53 +231,61 @@ valid_json_users = """[
 
 @pytest.fixture
 def mock_login(mocker):
-    return mocker.patch('login.login', return_value={"username": "Ramanathan", "wallet": 100})
+    return mocker.patch(
+        "login.login", return_value={"username": "Ramanathan", "wallet": 100}
+    )
 
 
 @pytest.fixture
 def mock_input_login(mocker):
-    return mocker.patch('login.input', side_effect=valid_test_inputs)
+    return mocker.patch("login.input", side_effect=valid_test_inputs)
 
 
 @pytest.fixture
 def check_password_stub_correct(mocker):
-    return mocker.patch('login.check_password', return_value=True)
+    return mocker.patch("login.check_password", return_value=True)
 
 
 @pytest.fixture
 def mock_display_csv_as_table(mocker):
-    return mocker.patch('products.display_csv_as_table')
+    return mocker.patch("products.display_csv_as_table")
 
 
 @pytest.fixture
 def mock_display_filtered_table(mocker):
-    return mocker.patch('products.display_filtered_table')
+    return mocker.patch("products.display_filtered_table")
 
 
 @pytest.fixture
 def mock_checkout_and_payment(mocker):
-    return mocker.patch('checkout_and_payment.checkoutAndPayment')
+    return mocker.patch("checkout_and_payment.checkoutAndPayment")
 
 
 @pytest.fixture
 def mock_input_checkout_and_payment(mocker):
-    return mocker.patch('checkout_and_payment.input', side_effect=valid_checkout_and_payment_inputs)
+    return mocker.patch(
+        "checkout_and_payment.input", side_effect=valid_checkout_and_payment_inputs
+    )
 
 
 @pytest.fixture
 def mock_input_all(mocker):
-    return mocker.patch('products.input', side_effect=['all', 'Y'])
+    return mocker.patch("products.input", side_effect=["all", "Y"])
 
 
 @pytest.fixture
 def mock_input_filtered(mocker):
-    return mocker.patch('products.input', side_effect=['Product1', 'Y'])
+    return mocker.patch("products.input", side_effect=["Product1", "Y"])
 
 
 @pytest.fixture
 def mock_open_users(mocker):
     json_file = io.StringIO(valid_json_users)
-    return mocker.patch('checkout_and_payment.open', side_effect=mock_open(read_data=json_file.getvalue()))
+    return mocker.patch(
+        "checkout_and_payment.open",
+        side_effect=mock_open(read_data=json_file.getvalue()),
+    )
+
 
 ## Fixtures for checkoutAndPayment
 @pytest.fixture
@@ -278,29 +294,32 @@ def mock_open_users_file():
     users = [{"username": "user1", "wallet": 100}, {"username": "user2", "wallet": 200}]
     return mock_open(read_data=json.dumps(users))
 
+
 @pytest.fixture
 def mock_input(mocker):
     """Fixture to mock user input."""
-    return mocker.patch('builtins.input')
+    return mocker.patch("builtins.input")
+
 
 @pytest.fixture
 def mock_check_cart(mocker):
     """Fixture to mock cart checking functionality."""
-    return mocker.patch('checkout_and_payment.check_cart', return_value=True)
+    return mocker.patch("checkout_and_payment.check_cart", return_value=True)
+
 
 @pytest.fixture
 def mock_logout(mocker):
     """Fixture to mock logout functionality."""
-    return mocker.patch('checkout_and_payment.logout', return_value=True)
+    return mocker.patch("checkout_and_payment.logout", return_value=True)
+
 
 @pytest.fixture
 def mock_update_users_json(mocker):
     """Fixture to mock update_users_json function."""
-    return mocker.patch('checkout_and_payment.update_users_json')
+    return mocker.patch("checkout_and_payment.update_users_json")
+
 
 ## Fixtures for load_products_from_csv
-
-
 @pytest.fixture
 def csv_file_optimal_state(tmp_path):
     test_file = tmp_path / "optimal.csv"
@@ -458,39 +477,56 @@ def csv_name():
     return data
 
 
-
-
- 
+## Fixtures for change_details
+@pytest.fixture
+def test_entry():
+    return {
+        "username": "test",
+        "password": "test",
+        "address": "Dag Hammarskälds Väg",
+        "phone": "07099999999",
+        "email": "test@gmail.com",
+        "credit": {
+            "number": "0365027409470925",
+            "expiry": "11/25",
+            "cvv": "999",
+        },
+    }
 
 
 ## Tests for check_cart
 def test_check_cart_empty_cart(user_1, cart_2):
     # Test with an empty cart
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-    
-        with patch('builtins.input', return_value='Y'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="Y"):
             result = check_cart(user_1, cart_2)
-        
-            # Assert the return value 
-            assert(result == False)
+
+            # Assert the return value
+            assert result == False
 
         # Assert that an empty cart has been identified
-        assert mocked_stdout.getvalue() == "\nYour basket is empty. Please add items before checking out.\n"
+        assert (
+            mocked_stdout.getvalue()
+            == "\nYour basket is empty. Please add items before checking out.\n"
+        )
+
 
 def test_check_cart_insufficient_funds(user_1, cart_1):
     # Test the fucntion with not enough funds in the wallet
     user_1.wallet = 10
 
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-    
-        with patch('builtins.input', return_value='Y'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="Y"):
             result = check_cart(user_1, cart_1)
-        
-            # Assert the return value 
-            assert(result == False)
+
+            # Assert the return value
+            assert result == False
 
         # Assert that insufficient funds have been identified
-        assert mocked_stdout.getvalue().splitlines()[-2] == "You don't have enough money to complete the purchase."
+        assert (
+            mocked_stdout.getvalue().splitlines()[-2]
+            == "You don't have enough money to complete the purchase."
+        )
         assert mocked_stdout.getvalue().splitlines()[-1] == "Please try again!"
 
 
@@ -498,29 +534,31 @@ def test_check_cart_invalid_input(user_1, cart_1):
     # Test the function with invalid input strings
     invalid_inputs = ["abcd", "", " ", "4321"]
     for input in invalid_inputs:
-        with patch('builtins.input', return_value=input):
+        with patch("builtins.input", return_value=input):
             # Assert that the inputs were invalid
-            assert(check_cart(user_1, cart_1) == False)
+            assert check_cart(user_1, cart_1) == False
 
 
 def test_check_cart_contents(user_1, cart_1):
     # Test the function to check that the items remain in the cart if no is chosen
-    with patch('sys.stdout', new_callable=io.StringIO) as mocked_stdout:
-        with patch('builtins.input', return_value='n'):
+    with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
+        with patch("builtins.input", return_value="n"):
             check_cart(user_1, cart_1)
         stdout = mocked_stdout.getvalue()
         for i in cart_1.items:
             # Assert that the items remain in the cart
-            assert(i.name in stdout)
+            assert i.name in stdout
+
 
 def test_check_cart_case_sensitivity(user_1, cart_1):
     # Test the function with invalid input and for upper and lower cases
     invalid_inputs = ["Ya", "ya"]
     for input in invalid_inputs:
-        with patch('builtins.input', return_value=input):
+        with patch("builtins.input", return_value=input):
             result = check_cart(user_1, cart_1)
             # Assert that the inputs were identified as invalid
-            assert(result == False)
+            assert result == False
+
 
 ## Tests for login
 def test_check_password_no_capital():
@@ -541,6 +579,7 @@ def test_check_password_no_special_char():
 
 def test_check_password_valid():
     assert check_password("Password1!") is True
+
 
 ## Tests for logout
 def test_logout_float_input():
@@ -569,6 +608,7 @@ def test_logout_empty_input():
         # The function should raise a TypeError for incorrect input type
         assert True  # The function raised the expected exception
 
+
 ## Tests for checkout
 def test_checkout_sufficient_funds(user_2, filled_cart):
     # Test checkout with sufficient user funds
@@ -585,23 +625,23 @@ def test_checkout_product_zero_units_single(user_1, single_cart_1):
     # Test checkout to see that no zero-unit product remains, they should have been removed
     checkout(user_1, single_cart_1)
     for i in single_cart_1.items:
-        # Assert units are above zero 
-        assert (i.units > 0)
+        # Assert units are above zero
+        assert i.units > 0
 
 
 def test_checkout_product_zero_units_multi(user_1, multi_cart):
     # Test checkout for a bigger cart to see that no zero-unit product remains, they should have been removed
     checkout(user_1, multi_cart)
     for i in multi_cart.items:
-        # Assert units are above zero 
-        assert (i.units > 0)
+        # Assert units are above zero
+        assert i.units > 0
 
 
 def test_checkout_just_enough_money(user_3, single_cart_2):
     # Test checkout for the case when the user has just enough money for the transaction
     with patch("sys.stdout", new_callable=io.StringIO) as mocked_stdout:
         checkout(user_3, single_cart_2)
-        # Assert that 0.0 money remains in the wallet 
+        # Assert that 0.0 money remains in the wallet
         assert (
             mocked_stdout.getvalue()
             == "\n\nThank you for your purchase, Test_Exakt! Your remaining balance is 0.0\n"
@@ -615,37 +655,46 @@ def test_checkout_wallet_update(user_2, filled_cart):
     checkout(user_2, filled_cart)
     cost = wallet - price
     # Assert that the remaining money in the wallet wallet is correct
-    assert (cost == user_2.wallet)
-
+    assert cost == user_2.wallet
 
 
 ## Tests for products
 def test_display_csv_as_table_with_pdf_file():
-    with patch('builtins.open', side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error")):
+    with patch(
+        "builtins.open",
+        side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error"),
+    ):
         with pytest.raises(UnicodeDecodeError):
-            display_csv_as_table('example.pdf')
+            display_csv_as_table("example.pdf")
 
 
 def test_display_csv_as_table_with_jpg_file():
-    with patch('builtins.open', side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error")):
+    with patch(
+        "builtins.open",
+        side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error"),
+    ):
         with pytest.raises(UnicodeDecodeError):
-            display_csv_as_table('example.jpg')
+            display_csv_as_table("example.jpg")
 
 
 def test_display_csv_as_table_with_excel_file():
-    with patch('builtins.open', side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error")):
+    with patch(
+        "builtins.open",
+        side_effect=UnicodeDecodeError("utf-8", b"", 0, 1, "unicode error"),
+    ):
         with pytest.raises(UnicodeDecodeError):
-            display_csv_as_table('example.excel')
+            display_csv_as_table("example.excel")
 
 
 def test_display_csv_as_table_non_existence_file():
     with pytest.raises(FileNotFoundError):
-        display_csv_as_table('nonexistent_file.csv')
+        display_csv_as_table("nonexistent_file.csv")
 
 
 def test_display_csv_as_table_empty_file_name():
     with pytest.raises(FileNotFoundError):
-        display_csv_as_table('')
+        display_csv_as_table("")
+
 
 def test_display_filtered_csv_as_table_none_search_parameter():
     with pytest.raises(TypeError):
@@ -664,7 +713,7 @@ def test_display_filtered_csv_as_table_list_search_parameter():
 
 def test_display_filtered_csv_as_table_dictionary_search_parameter():
     with pytest.raises(TypeError):
-        display_csv_as_table(temp_csv_file_stub, {'filename': 'test.csv'})
+        display_csv_as_table(temp_csv_file_stub, {"filename": "test.csv"})
 
 
 def test_display_filtered_csv_as_table_int_search_parameter():
@@ -676,12 +725,6 @@ def test_display_filtered_csv_as_table_boolean_search_parameter():
     with pytest.raises(TypeError):
         display_csv_as_table(temp_csv_file_stub, True)
 
-def test_search_and_buy_products_filtered(mock_login, check_password_stub_correct,
-                                          mock_checkout_and_payment, mock_display_filtered_table,
-                                          mock_input_filtered, mock_input_login, mock_input_checkout_and_payment,
-                                          mock_open_users):
-    searchAndBuyProduct()
-    mock_display_filtered_table.assert_called_once()
 
 ## Test for checkoutAndPayment
 def capture_write_calls(mock_file):
@@ -697,26 +740,46 @@ def capture_write_calls(mock_file):
     return content
 
 
-@pytest.mark.parametrize("invalid_login_info", [
-    "invalid_string", 12345, 4.56,
-    {"username": "testuser"}, {"wallet": 100},
-    {"user": "testuser", "wallet": 100}
-])
-def test_checkout_and_payment_invalid_login_info(invalid_login_info, mock_input, mock_check_cart, mock_logout, mock_update_users_json):
+@pytest.mark.parametrize(
+    "invalid_login_info",
+    [
+        "invalid_string",
+        12345,
+        4.56,
+        {"username": "testuser"},
+        {"wallet": 100},
+        {"user": "testuser", "wallet": 100},
+    ],
+)
+def test_checkout_and_payment_invalid_login_info(
+    invalid_login_info, mock_input, mock_check_cart, mock_logout, mock_update_users_json
+):
     """Test checkoutAndPayment with various invalid login info formats."""
     with pytest.raises(TypeError):
         checkoutAndPayment(invalid_login_info)
 
-@pytest.mark.parametrize("mock_input_value, expected_output", [
-    (['l'], "You have been logged out."),
-    (['c', 'l'], "You have been logged out."),
-    (['1', 'c', 'l'], "Apple added to your cart."),
-    ([str(len(productz) + 1), 'l'], "\nInvalid input. Please try again."),
-    (['apple', 'l'], "\nInvalid input. Please try again."),
-    (['0.75', 'l'], "\nInvalid input. Please try again."),
-    (['[]', 'l'], "\nInvalid input. Please try again.")
-])
-def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+
+@pytest.mark.parametrize(
+    "mock_input_value, expected_output",
+    [
+        (["l"], "You have been logged out."),
+        (["c", "l"], "You have been logged out."),
+        (["1", "c", "l"], "Apple added to your cart."),
+        ([str(len(productz) + 1), "l"], "\nInvalid input. Please try again."),
+        (["apple", "l"], "\nInvalid input. Please try again."),
+        (["0.75", "l"], "\nInvalid input. Please try again."),
+        (["[]", "l"], "\nInvalid input. Please try again."),
+    ],
+)
+def test_checkout_and_payment_scenarios(
+    mock_input_value,
+    expected_output,
+    mock_input,
+    mock_check_cart,
+    mock_logout,
+    mock_update_users_json,
+    capsys,
+):
     """Test various scenarios in checkoutAndPayment based on different user inputs."""
     mock_input.side_effect = mock_input_value
     checkoutAndPayment({"username": "testuser", "wallet": 100})
@@ -724,18 +787,24 @@ def test_checkout_and_payment_scenarios(mock_input_value, expected_output, mock_
     assert expected_output in captured.out
     mock_logout.assert_called_once()
 
-def test_checkout_and_payment_print_products(mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+
+def test_checkout_and_payment_print_products(
+    mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys
+):
     """Test that all products are printed correctly in the checkout process."""
-    mock_input.side_effect = ['l']
+    mock_input.side_effect = ["l"]
     checkoutAndPayment({"username": "testuser", "wallet": 100})
     captured = capsys.readouterr()
     for product in productz:
         assert f"{product.name} - ${product.price}" in captured.out
     mock_logout.assert_called_once()
 
-def test_checkout_and_payment_session_management(mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys):
+
+def test_checkout_and_payment_session_management(
+    mock_input, mock_check_cart, mock_logout, mock_update_users_json, capsys
+):
     """Test the management of user session in repeated calls of checkoutAndPayment."""
-    mock_input.side_effect = ['1', 'l', '2', 'l']
+    mock_input.side_effect = ["1", "l", "2", "l"]
     user_info = {"username": "testuser", "wallet": 100}
 
     # Test with two consecutive calls to simulate user session
@@ -746,8 +815,8 @@ def test_checkout_and_payment_session_management(mock_input, mock_check_cart, mo
     assert captured.out.count("You have been logged out.") == 2
     assert mock_logout.call_count == 2
 
-## Tests for _
 
+## Tests for load_products_from_csv
 def test_load_products_from_csv_huge_file(csv_file_huge_state):
     # Test the load function for huge ammount of csv data
     loaded = load_products_from_csv(csv_file_huge_state)
@@ -770,7 +839,9 @@ def test_load_products_from_csv_added_head(
         assert v.price == csv_price[i]
 
 
-def test_load_products_from_csv_added_column_1(csv_file_added_column_state_1, csv_name, csv_units, csv_price):
+def test_load_products_from_csv_added_column_1(
+    csv_file_added_column_state_1, csv_name, csv_units, csv_price
+):
     # Test the load function for additional column added at the end to csv
     loaded = load_products_from_csv(csv_file_added_column_state_1)
     for i, v in enumerate(loaded):
@@ -804,3 +875,43 @@ def test_load_products_from_csv_added_column_3(
         assert v.price == csv_price[i]
 
 
+## Tests for change_details
+
+
+def test_change_details_input_not_Y(test_entry):
+    with patch("builtins.input", side_effect=["N"]):
+        assert change_details(test_entry) == None
+
+
+def test_change_details_address(test_entry):
+    with patch("builtins.input", side_effect=["Y", "a", "Raketvägen"]):
+        assert change_details(test_entry) == {
+            "username": "test",
+            "password": "test",
+            "address": "Raketvägen",
+            "phone": "07099999999",
+            "email": "test@gmail.com",
+            "credit": {
+                "number": "0365027409470925",
+                "expiry": "11/25",
+                "cvv": "999",
+            },
+        }
+
+
+def test_change_details_credit_card(test_entry):
+    with patch(
+        "builtins.input", side_effect=["Y", "c", "9999999999999999", "99/99", "999"]
+    ):
+        assert change_details(test_entry) == {
+            "username": "test",
+            "password": "test",
+            "address": "Dag Hammarskälds Väg",
+            "phone": "07099999999",
+            "email": "test@gmail.com",
+            "credit": {
+                "number": "9999999999999999",
+                "expiry": "99/99",
+                "cvv": "999",
+            },
+        }

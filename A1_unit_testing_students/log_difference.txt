@@ -1,14 +1,60 @@
-7c7
-< test_change_details.py .FF                                               [  2%]
+58,59c58,59
+< test_regression.py::test_change_details_address FAILED                   [ 98%]
+< test_regression.py::test_change_details_credit_card FAILED               [100%]
 ---
-> test_change_details.py ...                                               [  2%]
-12c12
-< test_login.py ....F......                                                [ 43%]
+> test_regression.py::test_change_details_address PASSED                   [ 98%]
+> test_regression.py::test_change_details_credit_card PASSED               [100%]
+61,111c61
+< =================================== FAILURES ===================================
+< _________________________ test_change_details_address __________________________
+< 
+< test_entry = {'address': 'Dag Hammarskälds Väg', 'credit': {'cvv': '999', 'expiry': '11/25', 'number': '0365027409470925'}, 'email': 'test@gmail.com', 'password': 'test', ...}
+< 
+<     def test_change_details_address(test_entry):
+<         with patch("builtins.input", side_effect=["Y", "a", "Raketvägen"]):
+< >           assert change_details(test_entry) == {
+<                 "username": "test",
+<                 "password": "test",
+<                 "address": "Raketvägen",
+<                 "phone": "07099999999",
+<                 "email": "test@gmail.com",
+<                 "credit": {
+<                     "number": "0365027409470925",
+<                     "expiry": "11/25",
+<                     "cvv": "999",
+<                 },
+<             }
+< E           AssertionError: assert None == {'address': 'Raketvägen', 'credit': {'cvv': '999', 'expiry': '11/25', 'number': '0365027409470925'}, 'email': 'test@gmail.com', 'password': 'test', ...}
+< E            +  where None = change_details({'address': 'Dag Hammarskälds Väg', 'credit': {'cvv': '999', 'expiry': '11/25', 'number': '0365027409470925'}, 'email': 'test@gmail.com', 'password': 'test', ...})
+< 
+< test_regression.py:888: AssertionError
+< _______________________ test_change_details_credit_card ________________________
+< 
+< test_entry = {'address': 'Dag Hammarskälds Väg', 'credit': {'cvv': '999', 'expiry': '11/25', 'number': '0365027409470925'}, 'email': 'test@gmail.com', 'password': 'test', ...}
+< 
+<     def test_change_details_credit_card(test_entry):
+<         with patch(
+<             "builtins.input", side_effect=["Y", "c", "9999999999999999", "99/99", "999"]
+<         ):
+< >           assert change_details(test_entry) == {
+<                 "username": "test",
+<                 "password": "test",
+<                 "address": "Dag Hammarskälds Väg",
+<                 "phone": "07099999999",
+<                 "email": "test@gmail.com",
+<                 "credit": {
+<                     "number": "9999999999999999",
+<                     "expiry": "99/99",
+<                     "cvv": "999",
+<                 },
+<             }
+< E           AssertionError: assert None == {'address': 'Dag Hammarskälds Väg', 'credit': {'cvv': '999', 'expiry': '99/99', 'number': '9999999999999999'}, 'email': 'test@gmail.com', 'password': 'test', ...}
+< E            +  where None = change_details({'address': 'Dag Hammarskälds Väg', 'credit': {'cvv': '999', 'expiry': '11/25', 'number': '0365027409470925'}, 'email': 'test@gmail.com', 'password': 'test', ...})
+< 
+< test_regression.py:906: AssertionError
+< =========================== short test summary info ============================
+< FAILED test_regression.py::test_change_details_address - AssertionError: asse...
+< FAILED test_regression.py::test_change_details_credit_card - AssertionError: ...
+< ========================= 2 failed, 50 passed in 0.54s =========================
 ---
-> test_login.py F...F......                                                [ 43%]
-14,15c14,15
-< test_products.py ........................                                [ 65%]
-< test_regression.py .............F..F.....................F...........    [100%]
----
-> test_products.py ......................FF                                [ 65%]
-> test_regression.py .............F..F............F........F...........    [100%]
+> ============================== 52 passed in 0.41s ==============================
