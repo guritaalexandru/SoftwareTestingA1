@@ -111,10 +111,6 @@ def check_cart(user, cart):
             for i in cart.retrieve_item():
                 if i.name == removeProductName:
                     cart.remove_item(i)
-                    # Update the product units
-                    for j in products:
-                        if j.name == removeProductName:
-                            j.units += 1
                     break
 
             # Display the updated cart
