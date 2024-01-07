@@ -1,0 +1,10 @@
+Smoke tests Alex - Notes:
+
+I have created a test suite of 10 smoke tests to check the functionality of logging in / registering, adding items to the cart and checking out, then logging out
+I have created fixtures with stubs for the functions that would have modified users.json
+I have created mocks to take care of inputting from the keyboard
+For each test that I have commented in smoke_tests_alex.py, I have defined mock inputs tailored for each case and tested different scenarios
+
+Highlights:
+I have captured the console output and checked different outputs with "capsys.readouterr().out.count" 
+I have expected some scenarios to throw errors with  "with pytest.raises(TypeError)"

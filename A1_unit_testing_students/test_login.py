@@ -51,7 +51,7 @@ def test_login_new_user_X_register():
 
 def test_login_new_user_register_valid_password(write_to_file_stub, check_password_stub_correct):
     with patch('builtins.input', side_effect=new_user_valid_password):
-        assert login() == {"username": new_user_valid_password[0], "wallet": 0}
+        assert login() == {"username": new_user_valid_password[0], "wallet": 100}
         write_to_file_stub.assert_called_once()
         check_password_stub_correct.assert_called_once_with(new_user_valid_password[3])
 

@@ -54,10 +54,10 @@ def login():
             if not check_password(new_pass):
                 return None
 
-            data.append({"username": username, "password": new_pass, "wallet": 0})
+            data.append({"username": username, "password": new_pass, "wallet": 100})
             write_to_file(data)
 
             print("Successfully registered")
-            return {"username": username, "wallet": 0}
+            return {"username": username, "wallet": 100}
         else:
             return None
